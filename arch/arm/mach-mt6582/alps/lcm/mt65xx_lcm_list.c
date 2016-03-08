@@ -9,8 +9,8 @@
 //used to identify float ID PIN status
 #define LCD_HW_ID_STATUS_LOW      0
 #define LCD_HW_ID_STATUS_HIGH     1
-#define LCD_HW_ID_STATUS_FLOAT 0x02
-#define LCD_HW_ID_STATUS_ERROR  0x03
+#define LCD_HW_ID_STATUS_FLOAT    2
+#define LCD_HW_ID_STATUS_ERROR    3
 
 #ifdef BUILD_LK
 #define LCD_DEBUG(fmt)  dprintf(CRITICAL,fmt)
@@ -18,27 +18,15 @@
 #define LCD_DEBUG(fmt)  printk(fmt)
 #endif
 
-extern LCM_DRIVER nt35512_wvga_dsi_vdo_txd_lcm_drv;
-extern LCM_DRIVER otm8018b_wvga_dsi_vdo_dijing_lcm_drv;
-extern LCM_DRIVER otm8019a_wvga_dsi_vdo_dijing_lcm_drv;
+extern LCM_DRIVER hx8379c_wvga_dsi_vdo_hlt_lcm_drv;
 
 
 
 LCM_DRIVER* lcm_driver_list[] = 
 {
-#if defined(OTM8018B_WVGA_DSI_VDO_DIJING)
-	&otm8018b_wvga_dsi_vdo_dijing_lcm_drv,
+#if defined(HX8379C_WVGA_DSI_VDO_HLT)
+	&hx8379c_wvga_dsi_vdo_hlt_lcm_drv,
 #endif
-
-#if defined(OTM8019A_WVGA_DSI_VDO_DIJING)
-	&otm8019a_wvga_dsi_vdo_dijing_lcm_drv,
-#endif
-  
-#if defined(NT35512_WVGA_DSI_VDO_TXD)
-	&nt35512_wvga_dsi_vdo_txd_lcm_drv,
-#endif
-
-
 };
 
 #define LCM_COMPILE_ASSERT(condition) LCM_COMPILE_ASSERT_X(condition, __LINE__)

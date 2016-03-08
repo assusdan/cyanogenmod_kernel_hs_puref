@@ -574,6 +574,10 @@ typedef struct
     unsigned int		mixmode_mipi_clock; 
     unsigned int		pwm_fps;
 #endif
+	unsigned int        lfr_enable;
+	unsigned int        lfr_mode;
+	unsigned int        lfr_type;
+	unsigned int        lfr_skip_num;
 
 } LCM_DSI_PARAMS;
 
@@ -644,6 +648,7 @@ typedef struct
     int (*set_gpio_pull_enable)(unsigned int pin, unsigned char pull_en);
     void (*dsi_set_cmdq_V22)(void* cmdq, unsigned cmd, unsigned char count, unsigned char *para_list, unsigned char force_update);
     void (*dsi_swap_port)(int swap);
+	void (*dsi_set_cmdq_V23)(void* cmdq, unsigned cmd, unsigned char count, unsigned char *para_list, unsigned char force_update);//dual
 } LCM_UTIL_FUNCS;
 typedef enum
 {
@@ -670,10 +675,13 @@ typedef struct
 
     ///////////////////////////CABC backlight related function
     void (*set_backlight)(unsigned int level);
+	void (*set_backlight_cmdq)(void* handle,unsigned int level);
     void (*set_pwm)(unsigned int divider);
     unsigned int (*get_pwm)(unsigned int divider);
     void (*set_backlight_mode)(unsigned int mode);
     ///////////////////////////
+    
+    int (*adjust_fps)(void *cmdq, int fps);
 
     /////////////ESD_RECOVERY//////////////////////
     unsigned int (*esd_check)(void);
