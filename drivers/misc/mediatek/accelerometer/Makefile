@@ -37,10 +37,6 @@ ifeq ($(CONFIG_MTK_MPU6515A),y)
 obj-y   +=  mpu6515/
 endif
 
-ifeq ($(CONFIG_MTK_KXTJ2_1009_NEW),y)
-obj-y   +=  KXTJ2_1009-new/
-endif
-
 ifeq ($(CONFIG_MTK_KXTJ2_1009),y)
 obj-y   +=  KXTJ2_1009/
 endif

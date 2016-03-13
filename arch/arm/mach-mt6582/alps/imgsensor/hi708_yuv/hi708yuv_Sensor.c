@@ -920,15 +920,15 @@ static void HI708_Cal_Min_Frame_Rate(kal_uint16 min_framerate)
         HI708_expbanding = (HI708_sensor.pv_pclk/HI708_sensor.pv_line_length/100)*HI708_sensor.pv_line_length/8;
         HI708_expmax = HI708_expbanding*10*(100/min_framerate) ;
     }
-    else if(HI708_sensor.banding == AE_FLICKER_MODE_60HZ)
+    else //if(HI708_sensor.banding == AE_FLICKER_MODE_60HZ)
     {
         HI708_expbanding = (HI708_sensor.pv_pclk/HI708_sensor.pv_line_length/120)*HI708_sensor.pv_line_length/8;
         HI708_expmax = HI708_expbanding*10*(120/min_framerate) ;
     }
-    else//default 5oHZ
-    {
-        SENSORDB("[HI708][Error] Wrong Banding Setting!!!...");
-    }
+    //else//default 5oHZ
+   // {
+    //    SENSORDB("[HI708][Error] Wrong Banding Setting!!!...");
+   // }
 
     HI708_write_cmos_sensor(0x03, 0x00);
     HI708_write_cmos_sensor(0x12,HI708_read_cmos_sensor(0x12)|0x01);
@@ -1056,14 +1056,14 @@ static void HI708_Fix_Video_Frame_Rate(kal_uint16 fix_framerate)
     {
         HI708_expbanding = ((HI708_read_cmos_sensor(0x8b)<<8)|HI708_read_cmos_sensor(0x8c));
     }
-    else if(HI708_sensor.banding == AE_FLICKER_MODE_60HZ)
+    else// if(HI708_sensor.banding == AE_FLICKER_MODE_60HZ)
     {
         HI708_expbanding = ((HI708_read_cmos_sensor(0x8d)<<8)|HI708_read_cmos_sensor(0x8e));
     }
-    else
-    {
-        SENSORDB("[HI708]Wrong Banding Setting!!!...");
-    }
+    //else
+   // {
+    //    SENSORDB("[HI708]Wrong Banding Setting!!!...");
+    //}
     HI708_expmax = ((HI708_expfix_temp-HI708_expbanding)/HI708_expbanding)*HI708_expbanding;    
 
     HI708_write_cmos_sensor(0x03, 0x20);
