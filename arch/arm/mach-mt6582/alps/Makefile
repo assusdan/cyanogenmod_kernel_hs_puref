@@ -44,10 +44,7 @@ endif
 obj-y   +=  lcm/
 #obj-y	+=  hdmi/
 obj-y	+=  camera/camera/
-obj-y	+=  imgsensor/t4k04_mipi_raw/
-obj-y	+=  imgsensor/ov12830_mipi_raw/
-obj-y	+=  imgsensor/ov5648_mipi_raw/
-obj-y	+=  imgsensor/ov5645_mipi_yuv/
+obj-y	+=  imgsensor/hi551_mipi_raw/
 obj-y	+=  imgsensor/gc0311_yuv/
 obj-y	+=  imgsensor/hi708_yuv/
 obj-y   +=  flashlight/constant_flashlight/
