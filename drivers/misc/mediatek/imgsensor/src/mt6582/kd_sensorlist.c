@@ -1570,7 +1570,7 @@ inline static int  adopt_CAMERA_HW_FeatureControl(void *pBuf)
 ********************************************************************************/
 inline static int adopt_CAMERA_HW_Close(void)
 {
-    if (atomic_read(&g_CamHWOpend) == 0) {
+    /*if (atomic_read(&g_CamHWOpend) == 0) {
         return 0;
     }
     else if(atomic_read(&g_CamHWOpend) == 1) {
@@ -1593,8 +1593,8 @@ inline static int adopt_CAMERA_HW_Close(void)
     g_NewSensorExpGain.uSensorGainDelayFrame = 0xFF;
     g_NewSensorExpGain.uISPGainDelayFrame = 0xFF;
     spin_unlock(&kdsensor_drv_lock);
-
-    return 0;
+*/
+    return 0; 
 }   /* adopt_CAMERA_HW_Close() */
 
 

@@ -380,7 +380,8 @@ struct address_space_operations {
 	int (*launder_page) (struct page *);
 	int (*is_partially_uptodate) (struct page *, read_descriptor_t *,
 					unsigned long);
-	void (*is_dirty_writeback) (struct page *, bool *, bool *);
+                    	void (*is_dirty_writeback) (struct page *, bool *, bool *);
+
 	int (*error_remove_page)(struct address_space *, struct page *);
 
 	/* swapfile support */
@@ -1323,6 +1324,10 @@ struct super_block {
 
 	/* Being remounted read-only */
 	int s_readonly_remount;
+	#ifdef CONFIG_ASYNC_FSYNC
+	 #define FLAG_ASYNC_FSYNC 0x1
+	 unsigned int fsync_flags;
+	#endif
 };
 
 /* superblock cache pruning functions */
@@ -2089,6 +2094,7 @@ static inline void iterate_bdevs(void (*f)(struct block_device *, void *), void 
 }
 #endif
 extern int sync_filesystem(struct super_block *);
+extern void sync_filesystems(int wait);
 extern const struct file_operations def_blk_fops;
 extern const struct file_operations def_chr_fops;
 extern const struct file_operations bad_sock_fops;

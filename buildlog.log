@@ -1,19 +1,19 @@
 <stdin>:1226:2: warning: #warning syscall seccomp not implemented [-Wcpp]
-/tmp/cc760iAw.s: Assembler messages:
-/tmp/cc760iAw.s:195: Warning: register range not in ascending order
+/tmp/ccz9oHvl.s: Assembler messages:
+/tmp/ccz9oHvl.s:195: Warning: register range not in ascending order
 In file included from include/linux/amba/clcd.h:12:0,
                  from arch/arm/mach-mt6582/mt_devs.c:16:
 include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
  #define CONFIG_DMA_SHARED_BUFFER
  ^
 In file included from arch/arm/mach-mt6582/mt_devs.c:1:0:
-include/generated/autoconf.h:858:0: note: this is the location of the previous definition
+include/generated/autoconf.h:854:0: note: this is the location of the previous definition
  #define CONFIG_DMA_SHARED_BUFFER 1
  ^
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/arch/arm/mach-mt6582/alps/core/board-custom.h:4:0,
                  from arch/arm/mach-mt6582/include/mach/devs.h:4,
                  from arch/arm/mach-mt6582/mt_devs.c:22:
-include/generated/autoconf.h:858:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
+include/generated/autoconf.h:854:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
  #define CONFIG_DMA_SHARED_BUFFER 1
  ^
 In file included from include/linux/amba/clcd.h:12:0,
@@ -39,6 +39,16 @@ arch/arm/mach-mt6582/mt_pm_init.c: In function ‘mt_power_management_init’:
 arch/arm/mach-mt6582/mt_pm_init.c:309:28: warning: unused variable ‘entry’ [-Wunused-variable]
      struct proc_dir_entry *entry = NULL;
                             ^
+kernel/printk.c:278:13: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ inline void mt_disable_uart()
+             ^
+kernel/printk.c:287:13: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ inline void mt_enable_uart()
+             ^
+kernel/printk.c: In function ‘log_store’:
+kernel/printk.c:362:5: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+     char tbuf[50];
+     ^
 arch/arm/mach-mt6582/eint.c:805:13: warning: ‘mt_eint_dis_debounce’ defined but not used [-Wunused-function]
  static void mt_eint_dis_debounce(unsigned int eint_num)
              ^
@@ -2217,16 +2227,6 @@ arch/arm/mach-mt6582/camera_sysram.c: In function ‘SYSRAM_Init’:
 arch/arm/mach-mt6582/camera_sysram.c:1407:28: warning: unused variable ‘pEntry’ [-Wunused-variable]
      struct proc_dir_entry *pEntry;
                             ^
-kernel/printk.c:278:13: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- inline void mt_disable_uart()
-             ^
-kernel/printk.c:287:13: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- inline void mt_enable_uart()
-             ^
-kernel/printk.c: In function ‘log_store’:
-kernel/printk.c:362:5: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
-     char tbuf[50];
-     ^
 arch/arm/mach-mt6582/mt_cpufreq.c:3169:14: warning: initialization from incompatible pointer type
      .write = mt_cpufreq_debug_write,
               ^
@@ -2308,17 +2308,37 @@ arch/arm/mach-mt6582/mt_ptp.c:1703:28: warning: unused variable ‘entry’ [-Wu
      struct proc_dir_entry *entry = NULL;
                             ^
 arch/arm/mach-mt6582/alps/camera/camera/kd_camera_hw.c: In function ‘kdCISModulePowerOn’:
+arch/arm/mach-mt6582/alps/camera/camera/kd_camera_hw.c:111:22: warning: suggest parentheses around ‘&&’ within ‘||’ [-Wparentheses]
+   if (currSensorName && (0 == strcmp(SENSOR_DRVNAME_OV8825_MIPI_RAW,currSensorName)) \
+                      ^
 arch/arm/mach-mt6582/alps/camera/camera/kd_camera_hw.c:47:5: warning: unused variable ‘pinSetIdxTmp’ [-Wunused-variable]
  u32 pinSetIdxTmp = 0;
      ^
-arch/arm/mach-mt6582/alps/flashlight/constant_flashlight/leds_strobe.c:532:2: warning: initialization from incompatible pointer type
-  constant_flashlight_ioctl
-  ^
-arch/arm/mach-mt6582/alps/flashlight/constant_flashlight/leds_strobe.c:532:2: warning: (near initialization for ‘constantFlashlightFunc.flashlight_ioctl’)
-arch/arm/mach-mt6582/alps/flashlight/constant_flashlight/leds_strobe.c: In function ‘set_flashlight_state’:
-arch/arm/mach-mt6582/alps/flashlight/constant_flashlight/leds_strobe.c:400:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
+fs/namespace.c: In function ‘do_new_mount’:
+fs/namespace.c:2169:25: warning: passing argument 1 of ‘strcmp’ from incompatible pointer type
+   if (!err && ((!strcmp(type, "ext4") &&
+                         ^
+In file included from include/asm-generic/siginfo.h:22:0,
+                 from arch/arm/include/generated/asm/siginfo.h:1,
+                 from include/uapi/linux/signal.h:5,
+                 from include/linux/signal.h:5,
+                 from include/linux/syscalls.h:71,
+                 from fs/namespace.c:11:
+include/linux/string.h:38:12: note: expected ‘const char *’ but argument is of type ‘struct file_system_type *’
+ extern int strcmp(const char *,const char *);
+            ^
+fs/namespace.c:2171:12: warning: passing argument 1 of ‘strcmp’ from incompatible pointer type
+   (!strcmp(type, "fuse") &&
+            ^
+In file included from include/asm-generic/siginfo.h:22:0,
+                 from arch/arm/include/generated/asm/siginfo.h:1,
+                 from include/uapi/linux/signal.h:5,
+                 from include/linux/signal.h:5,
+                 from include/linux/syscalls.h:71,
+                 from fs/namespace.c:11:
+include/linux/string.h:38:12: note: expected ‘const char *’ but argument is of type ‘struct file_system_type *’
+ extern int strcmp(const char *,const char *);
+            ^
 In file included from arch/arm/mach-mt6582/alps/imgsensor/gc0311_yuv/gc0311yuv_Sensor.c:83:0:
 arch/arm/mach-mt6582/alps/imgsensor/gc0311_yuv/gc0311yuv_CameraCustomized.h:185:8: warning: multi-line comment [-Wcomment]
         //   {CAM_SIZE_05M_WIDTH,CAM_SIZE_05M_HEIGHT}, \
@@ -2360,44 +2380,6 @@ arch/arm/mach-mt6582/alps/imgsensor/gc0311_yuv/gc0311yuv_Sensor.c: In function �
 arch/arm/mach-mt6582/alps/imgsensor/gc0311_yuv/gc0311yuv_Sensor.c:108:1: warning: control reaches end of non-void function [-Wreturn-type]
  }
  ^
-arch/arm/mach-mt6582/alps/imgsensor/hi551_mipi_raw/hi551mipi_Sensor.c:190:13: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- static void set_dummy()
-             ^
-arch/arm/mach-mt6582/alps/imgsensor/hi551_mipi_raw/hi551mipi_Sensor.c: In function ‘set_max_framerate’:
-arch/arm/mach-mt6582/alps/imgsensor/hi551_mipi_raw/hi551mipi_Sensor.c:210:16: warning: unused variable ‘flags’ [-Wunused-variable]
-  unsigned long flags;
-                ^
-arch/arm/mach-mt6582/alps/imgsensor/hi551_mipi_raw/hi551mipi_Sensor.c:208:12: warning: unused variable ‘dummy_line’ [-Wunused-variable]
-  kal_int16 dummy_line;
-            ^
-arch/arm/mach-mt6582/alps/imgsensor/hi551_mipi_raw/hi551mipi_Sensor.c: In function ‘write_shutter’:
-arch/arm/mach-mt6582/alps/imgsensor/hi551_mipi_raw/hi551mipi_Sensor.c:229:2: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
-  kal_uint16 realtime_fps = 0;
-  ^
-arch/arm/mach-mt6582/alps/imgsensor/hi551_mipi_raw/hi551mipi_Sensor.c:230:13: warning: unused variable ‘frame_length’ [-Wunused-variable]
-  kal_uint32 frame_length = 0;
-             ^
-arch/arm/mach-mt6582/alps/imgsensor/hi551_mipi_raw/hi551mipi_Sensor.c: At top level:
-arch/arm/mach-mt6582/alps/imgsensor/hi551_mipi_raw/hi551mipi_Sensor.c:2632:13: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- static void hs_video_setting()
-             ^
-arch/arm/mach-mt6582/alps/imgsensor/hi551_mipi_raw/hi551mipi_Sensor.c:2704:13: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- static void slim_video_setting()
-             ^
-arch/arm/mach-mt6582/alps/imgsensor/hi551_mipi_raw/hi551mipi_Sensor.c: In function ‘set_max_framerate_by_scenario’:
-arch/arm/mach-mt6582/alps/imgsensor/hi551_mipi_raw/hi551mipi_Sensor.c:3442:13: warning: unused variable ‘lineLength’ [-Wunused-variable]
-  kal_uint32 lineLength,frameHeight;
-             ^
-arch/arm/mach-mt6582/alps/imgsensor/hi551_mipi_raw/hi551mipi_Sensor.c:3441:12: warning: unused variable ‘dummyLine’ [-Wunused-variable]
-  kal_int16 dummyLine;
-            ^
-arch/arm/mach-mt6582/alps/imgsensor/hi551_mipi_raw/hi551mipi_Sensor.c: At top level:
-arch/arm/mach-mt6582/alps/imgsensor/hi551_mipi_raw/hi551mipi_Sensor.c:392:13: warning: ‘set_mirror_flip’ defined but not used [-Wunused-function]
- static void set_mirror_flip(kal_uint8 image_mirror)
-             ^
-arch/arm/mach-mt6582/alps/imgsensor/hi551_mipi_raw/hi551mipi_Sensor.c:2893:13: warning: ‘video_setting’ defined but not used [-Wunused-function]
- static void video_setting(void)
-             ^
 arch/arm/mach-mt6582/alps/imgsensor/hi708_yuv/hi708yuv_Sensor.c:836:13: warning: ‘HI708_Set_Mirror_Flip’ defined but not used [-Wunused-function]
  static void HI708_Set_Mirror_Flip(kal_uint8 image_mirror)
              ^
@@ -2449,105 +2431,6 @@ drivers/cpufreq/cpufreq_interactive.c: In function ‘show_above_hispeed_delay�
 drivers/cpufreq/cpufreq_interactive.c:770:6: warning: operation on ‘ret’ may be undefined [-Wsequence-point]
   ret += sprintf(buf + --ret, "\n");
       ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:188:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- int IAPReset();
- ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:256:12: warning: extra tokens at end of #undef directive
- #undef pr_k(format, args...)
-            ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:298:15: warning: initialization from incompatible pointer type
-     .detect = tpd_detect,
-               ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:298:15: warning: (near initialization for ‘tpd_i2c_driver.detect’)
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c: In function ‘tpd_touchinfo’:
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:1200:6: warning: unused variable ‘fbits’ [-Wunused-variable]
-  u16 fbits = 0;
-      ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:1196:6: warning: unused variable ‘index’ [-Wunused-variable]
-  int index = 0;
-      ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:1195:19: warning: unused variable ‘temp’ [-Wunused-variable]
-     unsigned int  temp = 0;
-                   ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:1193:23: warning: unused variable ‘ShortTouchState’ [-Wunused-variable]
-     SHORT_TOUCH_STATE ShortTouchState;
-                       ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c: In function ‘touch_event_handler’:
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:1354:2: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
-  int last_key = 0;
-  ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:1355:6: warning: unused variable ‘key’ [-Wunused-variable]
-  int key;
-      ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:1354:6: warning: unused variable ‘last_key’ [-Wunused-variable]
-  int last_key = 0;
-      ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:1351:19: warning: unused variable ‘time_eclapse’ [-Wunused-variable]
-     unsigned long time_eclapse;
-                   ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:1349:9: warning: unused variable ‘touch_state’ [-Wunused-variable]
-     int touch_state = 3;
-         ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c: In function ‘CTP_EsdCheck’:
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:1618:9: warning: unused variable ‘reg_val’ [-Wunused-variable]
-     int reg_val[4] = {0x52,0x00,0x00,0x00};
-         ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c: In function ‘__elan_ktf2k_ts_poll’:
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:1741:29: warning: unused variable ‘ts’ [-Wunused-variable]
-  struct elan_ktf2k_ts_data *ts = i2c_get_clientdata(client);
-                             ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c: In function ‘tpd_probe’:
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:2161:2: warning: suggest parentheses around assignment used as truth value [-Wparentheses]
-  if(ret = ektf2k_create_attr(&ektf2k_tp_driver.driver))
-  ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c: In function ‘ektf_tpd_resume’:
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:2225:5: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
-     uint8_t cmd[] = {0x54, 0x58, 0x00, 0x01};
-     ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:2230:3: warning: ‘return’ with no value, in function returning non-void [-Wreturn-type]
-   return;
-   ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:2237:9: warning: ‘return’ with no value, in function returning non-void [-Wreturn-type]
-         return;
-         ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c: In function ‘tpd_suspend’:
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:2307:3: warning: ‘return’ with no value, in function returning non-void [-Wreturn-type]
-   return;
-   ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:2320:9: warning: ‘return’ with no value, in function returning non-void [-Wreturn-type]
-         return;
-         ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:2327:3: warning: ‘return’ with no value, in function returning non-void [-Wreturn-type]
-   return;
-   ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:2301:17: warning: unused variable ‘data’ [-Wunused-variable]
-     static char data = 0x3;
-                 ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c: At top level:
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:2467:16: warning: initialization from incompatible pointer type
-     .suspend = tpd_suspend,
-                ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:2467:16: warning: (near initialization for ‘tpd_device_driver.suspend’)
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:2468:15: warning: initialization from incompatible pointer type
-     .resume = ektf_tpd_resume,
-               ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:2468:15: warning: (near initialization for ‘tpd_device_driver.resume’)
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:76:16: warning: ‘file_fw_data’ defined but not used [-Wunused-variable]
- static uint8_t file_fw_data[] = {
-                ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:191:35: warning: ‘private_ts’ defined but not used [-Wunused-variable]
- static struct elan_ktf2k_ts_data *private_ts;
-                                   ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:195:12: warning: ‘elan_ktf2k_ts_rough_calibrate’ declared ‘static’ but never defined [-Wunused-function]
- static int elan_ktf2k_ts_rough_calibrate(struct i2c_client *client);
-            ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:203:12: warning: ‘p_point_num’ defined but not used [-Wunused-variable]
- static int p_point_num = 0;
-            ^
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c: In function ‘touch_event_handler’:
-drivers/input/touchscreen/mediatek/ektf2136/ekt2k_driver.c:1391:21: warning: ‘cinfo.key_val’ may be used uninitialized in this function [-Wmaybe-uninitialized]
-                     switch(cinfo.key_val)
-                     ^
 In file included from fs/fuse/dev.c:10:0:
 fs/fuse/dev.c: In function ‘fuse_request_send_ex’:
 fs/fuse/fuse.h:63:29: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
@@ -2556,16 +2439,6 @@ fs/fuse/fuse.h:63:29: warning: ISO C90 forbids mixed declarations and code [-Wde
 fs/fuse/dev.c:528:2: note: in expansion of macro ‘FUSE_IOLOG_INIT’
   FUSE_IOLOG_INIT();
   ^
-lib/lzo/lzo1x_compress.c:215:1: warning: return type defaults to ‘int’ [-Wreturn-type]
- lzo1x_1_do_compress_zram(const unsigned char *in, size_t in_len,
- ^
-lib/lzo/lzo1x_compress.c: In function ‘lzo1x_1_compress_zram’:
-lib/lzo/lzo1x_compress.c:513:34: warning: initialization from incompatible pointer type
-   {       unsigned int *tmp_op = op;
-                                  ^
-lib/lzo/lzo1x_compress.c:569:27: warning: initialization from incompatible pointer type
-   unsigned int *tmp_out = out;
-                           ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 In file included from include/linux/workqueue.h:8:0,
@@ -2927,28 +2800,9 @@ drivers/misc/mediatek/aee/aed/monitor_hang.c:295:22: warning: unused variable �
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-net/core/dev.c: In function ‘dev_queue_xmit’:
-net/core/dev.c:2805:31: warning: initialization from incompatible pointer type
-              __u16 * seq_id = (char *)udp_iphdr + 10;
-                               ^
-In file included from net/core/dev.c:132:0:
-net/core/dev.c: At top level:
-include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
- static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
-                                    ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/alsps/inc/alsps.h:17:0,
-                 from drivers/misc/mediatek/alsps/alsps.c:2:
-/home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/alsps/inc/alsps_factory.h:42:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- int alsps_factory_device_init();
- ^
-drivers/misc/mediatek/alsps/alsps.c: In function ‘ps_register_control_path’:
-drivers/misc/mediatek/alsps/alsps.c:991:6: warning: unused variable ‘err’ [-Wunused-variable]
-  int err =0;
-      ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 In file included from drivers/misc/mediatek/aee/ipanic/ipanic_emmc.c:1:0:
 include/linux/mmc/sd_misc.h:148:0: warning: "EXT_CSD_HC_ERASE_GRP_SIZE" redefined
@@ -2969,6 +2823,16 @@ include/linux/mmc/mmc.h:276:0: note: this is the location of the previous defini
  #define EXT_CSD_CACHE_CTRL  33      /* R/W */
  ^
 <command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/alsps/inc/alsps.h:17:0,
+                 from drivers/misc/mediatek/alsps/alsps.c:2:
+/home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/alsps/inc/alsps_factory.h:42:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ int alsps_factory_device_init();
+ ^
+drivers/misc/mediatek/alsps/alsps.c: In function ‘ps_register_control_path’:
+drivers/misc/mediatek/alsps/alsps.c:991:6: warning: unused variable ‘err’ [-Wunused-variable]
+  int err =0;
+      ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 In file included from drivers/misc/mediatek/alsps/alsps_factory.c:1:0:
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/alsps/inc/alsps_factory.h:42:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
@@ -3062,10 +2926,6 @@ drivers/misc/mediatek/alsps/epl2182/epl2182.c:2141:31: warning: ‘epl2182_alsps
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-In file included from net/core/rtnetlink.c:50:0:
-include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
- static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
-                                    ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
@@ -3090,6 +2950,40 @@ drivers/misc/mediatek/ccci_util/mt6582/ccci_off.c:13:13: warning: ‘internal_md
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+net/core/dev.c: In function ‘dev_queue_xmit’:
+net/core/dev.c:2805:31: warning: initialization from incompatible pointer type
+              __u16 * seq_id = (char *)udp_iphdr + 10;
+                               ^
+In file included from net/core/dev.c:132:0:
+net/core/dev.c: At top level:
+include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
+ static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
+                                    ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from drivers/mmc/card/block.c:60:0:
+include/linux/mmc/sd_misc.h:148:0: warning: "EXT_CSD_HC_ERASE_GRP_SIZE" redefined
+ #define EXT_CSD_HC_ERASE_GRP_SIZE        (224) /* RO */
+ ^
+In file included from include/trace/events/mmc.h:22:0,
+                 from drivers/mmc/card/block.c:39:
+include/linux/mmc/mmc.h:314:0: note: this is the location of the previous definition
+ #define EXT_CSD_HC_ERASE_GRP_SIZE 224 /* RO */
+ ^
+In file included from drivers/mmc/card/block.c:60:0:
+include/linux/mmc/sd_misc.h:157:0: warning: "EXT_CSD_CACHE_CTRL" redefined
+ #define EXT_CSD_CACHE_CTRL               (33)
+ ^
+In file included from include/trace/events/mmc.h:22:0,
+                 from drivers/mmc/card/block.c:39:
+include/linux/mmc/mmc.h:276:0: note: this is the location of the previous definition
+ #define EXT_CSD_CACHE_CTRL  33      /* R/W */
+ ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
 drivers/misc/mediatek/conn_soc/common/linux/pri/stp_btif.c: In function ‘mtk_wcn_consys_stp_btif_open’:
 drivers/misc/mediatek/conn_soc/common/linux/pri/stp_btif.c:88:43: warning: passing argument 2 of ‘mtk_wcn_btif_open’ from incompatible pointer type
   iRet = mtk_wcn_btif_open(BTIF_OWNER_NAME,pBtifRef);
@@ -3101,9 +2995,10 @@ drivers/misc/mediatek/conn_soc/common/linux/pri/../../../../btif/inc/mtk_btif_ex
            ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from net/core/rtnetlink.c:50:0:
+include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
+ static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
+                                    ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 drivers/misc/mediatek/conn_soc/common/linux/pri/wmt_dev.c: In function ‘wmt_dev_late_resume’:
 drivers/misc/mediatek/conn_soc/common/linux/pri/wmt_dev.c:206:9: warning: ‘return’ with a value, in function returning void
@@ -3141,6 +3036,29 @@ drivers/misc/mediatek/conn_soc/common/linux/pri/wmt_dev.c:109:15: warning: ‘pa
  static UINT32 passCnt = 0;
                ^
 <command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+drivers/mtd/mtdcore.c:1177:11: warning: initialization from incompatible pointer type
+  .write = mtd_writeable_proc_write,
+           ^
+drivers/mtd/mtdcore.c:1177:11: warning: (near initialization for ‘mtd_write_proc_fops.write’)
+drivers/mtd/mtdcore.c:1182:11: warning: initialization from incompatible pointer type
+  .write = mtd_change_proc_write,
+           ^
+drivers/mtd/mtdcore.c:1182:11: warning: (near initialization for ‘mtd_change_proc_fops.write’)
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from net/ipv6/af_inet6.c:49:0:
+include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
+ static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
+                                    ^
+<command-line>:0:16: warning: missing whitespace after the macro name
 In file included from net/ipv4/ip_forward.c:32:0:
 include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
  static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
@@ -3151,24 +3069,28 @@ include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from net/ipv6/af_inet6.c:49:0:
+In file included from net/ipv6/ipv6_sockglue.c:51:0:
 include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
  static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
                                     ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from net/ipv6/udp_impl.h:3:0,
+                 from net/ipv6/udp.c:53:
+include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
+ static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
+                                    ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from net/ipv6/udp_impl.h:3:0,
+                 from net/ipv6/udplite.c:15:
+include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
+ static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
+                                    ^
+In file included from net/ipv6/raw.c:50:0:
+include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
+ static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
+                                    ^
+<command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
@@ -3181,6 +3103,23 @@ include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but
  static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
                                     ^
 <command-line>:0:16: warning: missing whitespace after the macro name
+In file included from net/ipv6/ping.c:25:0:
+include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
+ static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
+                                    ^
+drivers/power/mediatek/battery_meter.c: In function ‘battery_meter_suspend’:
+drivers/power/mediatek/battery_meter.c:3511:18: warning: unused variable ‘xts’ [-Wunused-variable]
+  struct timespec xts, tom;
+                  ^
+drivers/power/mediatek/battery_meter.c: In function ‘battery_meter_dts_probe’:
+drivers/power/mediatek/battery_meter.c:3807:25: warning: unused variable ‘battery_dir’ [-Wunused-variable]
+  struct proc_dir_entry *battery_dir = NULL;
+                         ^
+drivers/power/mediatek/battery_meter.c: At top level:
+drivers/power/mediatek/battery_meter.c:3822:31: warning: ‘battery_meter_dts_driver’ defined but not used [-Wunused-variable]
+ static struct platform_driver battery_meter_dts_driver = {
+                               ^
+<command-line>:0:16: warning: missing whitespace after the macro name
 net/ipv4/udp.c: In function ‘udp_sendmsg’:
 net/ipv4/udp.c:935:27: warning: initialization from incompatible pointer type
           __u16 * seq_id = (char *)msg->msg_iov->iov_base + 2;
@@ -3192,90 +3131,46 @@ include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but
  static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
                                     ^
 <command-line>:0:16: warning: missing whitespace after the macro name
-In file included from net/ipv6/ipv6_sockglue.c:51:0:
-include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
- static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
-                                    ^
 In file included from net/ipv4/udp_impl.h:3:0,
                  from net/ipv4/udplite.c:17:
 include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
  static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
                                     ^
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from net/ipv6/udp_impl.h:3:0,
-                 from net/ipv6/udp.c:53:
-include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
- static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
-                                    ^
 In file included from net/ipv4/icmp.c:86:0:
 include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
  static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
                                     ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-In file included from net/ipv6/udp_impl.h:3:0,
-                 from net/ipv6/udplite.c:15:
-include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
- static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
-                                    ^
-In file included from net/ipv6/raw.c:50:0:
-include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
- static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
-                                    ^
+<command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 In file included from net/ipv4/af_inet.c:107:0:
 include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
  static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
                                     ^
 <command-line>:0:16: warning: missing whitespace after the macro name
-In file included from include/uapi/linux/stddef.h:1:0,
-                 from include/linux/stddef.h:4,
-                 from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/uapi/linux/posix_types.h:4,
-                 from include/uapi/linux/types.h:13,
-                 from include/linux/types.h:5,
-                 from include/linux/list.h:4,
-                 from include/linux/module.h:9,
-                 from net/netfilter/nfnetlink_queue_core.c:17:
-net/netfilter/nfnetlink_queue_core.c: In function ‘nfqnl_zcopy’:
-net/netfilter/nfnetlink_queue_core.c:264:32: warning: passing argument 1 of ‘skb_orphan_frags’ discards ‘const’ qualifier from pointer target type
-  if (unlikely(skb_orphan_frags(from, GFP_ATOMIC))) {
-                                ^
-include/linux/compiler.h:153:42: note: in definition of macro ‘unlikely’
- # define unlikely(x) __builtin_expect(!!(x), 0)
-                                          ^
-In file included from net/netfilter/nfnetlink_queue_core.c:18:0:
-include/linux/skbuff.h:1922:19: note: expected ‘struct sk_buff *’ but argument is of type ‘const struct sk_buff *’
- static inline int skb_orphan_frags(struct sk_buff *skb, gfp_t gfp_mask)
-                   ^
-net/netfilter/nfnetlink_queue_core.c:265:16: warning: passing argument 1 of ‘skb_tx_error’ discards ‘const’ qualifier from pointer target type
-   skb_tx_error(from);
-                ^
-In file included from net/netfilter/nfnetlink_queue_core.c:18:0:
-include/linux/skbuff.h:622:13: note: expected ‘struct sk_buff *’ but argument is of type ‘const struct sk_buff *’
- extern void skb_tx_error(struct sk_buff *skb);
-             ^
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from net/ipv6/ping.c:25:0:
+In file included from net/ipv6/proc.c:29:0:
 include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
  static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
                                     ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
 In file included from net/ipv4/ping.c:43:0:
 include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
  static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
                                     ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
 In file included from net/ipv4/sysctl_net_ipv4.c:23:0:
 include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
  static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
                                     ^
+<command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 In file included from net/ipv4/proc.c:39:0:
 include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
@@ -3288,56 +3183,19 @@ include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but
                                     ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-In file included from net/netfilter/nf_tproxy_core.c:18:0:
-include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
- static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
-                                    ^
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from net/netfilter/xt_tcpudp.c:8:0:
-include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
- static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
-                                    ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 In file included from net/ipv4/esp4.c:19:0:
 include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
  static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
                                     ^
 <command-line>:0:16: warning: missing whitespace after the macro name
-In file included from net/ipv6/proc.c:29:0:
-include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
- static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
-                                    ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from net/netfilter/xt_qtaguid.c:29:0:
-include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
- static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
-                                    ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from net/netfilter/xt_socket.c:18:0:
-include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
- static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
-                                    ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
 In file included from net/ipv6/sit.c:50:0:
 include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
  static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
                                     ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 In file included from net/ipv6/ip6_checksum.c:2:0:
 include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
@@ -3346,11 +3204,20 @@ include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
 In file included from net/ipv6/udp_offload.c:15:0:
 include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
  static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
                                     ^
+lib/lzo/lzo1x_compress.c:215:1: warning: return type defaults to ‘int’ [-Wreturn-type]
+ lzo1x_1_do_compress_zram(const unsigned char *in, size_t in_len,
+ ^
+lib/lzo/lzo1x_compress.c: In function ‘lzo1x_1_compress_zram’:
+lib/lzo/lzo1x_compress.c:513:34: warning: initialization from incompatible pointer type
+   {       unsigned int *tmp_op = op;
+                                  ^
+lib/lzo/lzo1x_compress.c:569:27: warning: initialization from incompatible pointer type
+   unsigned int *tmp_out = out;
+                           ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
@@ -3358,9 +3225,15 @@ include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-net/unix/af_unix.c:150:31: warning: ‘gunix_socket_track_aee_entry’ defined but not used [-Wunused-variable]
- static struct proc_dir_entry *gunix_socket_track_aee_entry = NULL;
-                               ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 In file included from drivers/misc/mediatek/dispsys/mt6582/ddp_path.h:4:0,
                  from drivers/misc/mediatek/dispsys/mt6582/ddp_drv.c:54:
@@ -3466,8 +3339,32 @@ drivers/misc/mediatek/dispsys/mt6582/ddp_debug.c:1445:5: warning: enumeration va
 drivers/misc/mediatek/dispsys/mt6582/ddp_cmdq.c:39:32: warning: ‘gCmdqComplete’ defined but not used [-Wunused-variable]
  static struct completion       gCmdqComplete;
                                 ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from include/uapi/linux/stddef.h:1:0,
+                 from include/linux/stddef.h:4,
+                 from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/uapi/linux/posix_types.h:4,
+                 from include/uapi/linux/types.h:13,
+                 from include/linux/types.h:5,
+                 from include/linux/list.h:4,
+                 from include/linux/module.h:9,
+                 from net/netfilter/nfnetlink_queue_core.c:17:
+net/netfilter/nfnetlink_queue_core.c: In function ‘nfqnl_zcopy’:
+net/netfilter/nfnetlink_queue_core.c:264:32: warning: passing argument 1 of ‘skb_orphan_frags’ discards ‘const’ qualifier from pointer target type
+  if (unlikely(skb_orphan_frags(from, GFP_ATOMIC))) {
+                                ^
+include/linux/compiler.h:153:42: note: in definition of macro ‘unlikely’
+ # define unlikely(x) __builtin_expect(!!(x), 0)
+                                          ^
+In file included from net/netfilter/nfnetlink_queue_core.c:18:0:
+include/linux/skbuff.h:1922:19: note: expected ‘struct sk_buff *’ but argument is of type ‘const struct sk_buff *’
+ static inline int skb_orphan_frags(struct sk_buff *skb, gfp_t gfp_mask)
+                   ^
+net/netfilter/nfnetlink_queue_core.c:265:16: warning: passing argument 1 of ‘skb_tx_error’ discards ‘const’ qualifier from pointer target type
+   skb_tx_error(from);
+                ^
+In file included from net/netfilter/nfnetlink_queue_core.c:18:0:
+include/linux/skbuff.h:622:13: note: expected ‘struct sk_buff *’ but argument is of type ‘const struct sk_buff *’
+ extern void skb_tx_error(struct sk_buff *skb);
+             ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
@@ -3603,6 +3500,9 @@ drivers/misc/mediatek/dispsys/mt6582/ddp_met.c: In function ‘ddp_get_bpp’:
 drivers/misc/mediatek/dispsys/mt6582/ddp_met.c:83:1: warning: control reaches end of non-void function [-Wreturn-type]
  }
  ^
+net/unix/af_unix.c:150:31: warning: ‘gunix_socket_track_aee_entry’ defined but not used [-Wunused-variable]
+ static struct proc_dir_entry *gunix_socket_track_aee_entry = NULL;
+                               ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 In file included from drivers/misc/mediatek/dual_ccci/mt6582/src/ccci_platform.c:21:0:
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci_common.h:38:0: warning: "pr_fmt" redefined
@@ -3642,7 +3542,6 @@ In file included from include/linux/kernel.h:13:0,
 include/linux/printk.h:208:0: note: this is the location of the previous definition
  #define pr_fmt(fmt) fmt
  ^
-<command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 In file included from drivers/misc/mediatek/dual_ccci/ccci_hw.c:6:0:
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci_common.h:38:0: warning: "pr_fmt" redefined
@@ -3709,6 +3608,7 @@ drivers/misc/mediatek/dual_ccci/ccci_chrdev.c:1162:70: warning: passing argument
 drivers/misc/mediatek/dual_ccci/ccci_chrdev.c:52:5: note: expected ‘int *’ but argument is of type ‘unsigned int (*)[4]’
  int scan_image_list(int md_id, char fmt[], int out_img_list[], int img_list_size)
      ^
+<command-line>:0:16: warning: missing whitespace after the macro name
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci.h:3:0,
                  from drivers/misc/mediatek/dual_ccci/ccci_tty.c:30:
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci_common.h:38:0: warning: "pr_fmt" redefined
@@ -3720,8 +3620,6 @@ In file included from include/linux/kernel.h:13:0,
 include/linux/printk.h:208:0: note: this is the location of the previous definition
  #define pr_fmt(fmt) fmt
  ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci.h:3:0,
                  from drivers/misc/mediatek/dual_ccci/ccci_ipc.c:16:
@@ -3737,6 +3635,7 @@ In file included from include/linux/kernel.h:13:0,
 include/linux/printk.h:208:0: note: this is the location of the previous definition
  #define pr_fmt(fmt) fmt
  ^
+<command-line>:0:16: warning: missing whitespace after the macro name
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci.h:3:0,
                  from drivers/misc/mediatek/dual_ccci/ccci_fs_main.c:32:
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci_common.h:38:0: warning: "pr_fmt" redefined
@@ -3748,6 +3647,11 @@ In file included from include/linux/kernel.h:13:0,
 include/linux/printk.h:208:0: note: this is the location of the previous definition
  #define pr_fmt(fmt) fmt
  ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from net/netfilter/nf_tproxy_core.c:18:0:
+include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
+ static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
+                                    ^
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci.h:3:0,
                  from drivers/misc/mediatek/dual_ccci/ccci_rpc_main.c:35:
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci_common.h:38:0: warning: "pr_fmt" redefined
@@ -3760,22 +3664,6 @@ include/linux/printk.h:208:0: note: this is the location of the previous definit
  #define pr_fmt(fmt) fmt
  ^
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci.h:3:0,
-                 from drivers/misc/mediatek/dual_ccci/ccmni_v2_net.c:21:
-/home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci_common.h:38:0: warning: "pr_fmt" redefined
- #define pr_fmt(fmt) "["KBUILD_MODNAME"]"fmt
- ^
-In file included from include/linux/kernel.h:13:0,
-                 from include/linux/interrupt.h:5,
-                 from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci_md.h:19,
-                 from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci_common.h:25,
-                 from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci.h:3,
-                 from drivers/misc/mediatek/dual_ccci/ccmni_v2_net.c:21:
-include/linux/printk.h:208:0: note: this is the location of the previous definition
- #define pr_fmt(fmt) fmt
- ^
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci.h:3:0,
                  from drivers/misc/mediatek/dual_ccci/ccmni_net.c:40:
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci_common.h:38:0: warning: "pr_fmt" redefined
@@ -3786,6 +3674,26 @@ In file included from include/linux/kernel.h:13:0,
 include/linux/printk.h:208:0: note: this is the location of the previous definition
  #define pr_fmt(fmt) fmt
  ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci.h:3:0,
+                 from drivers/misc/mediatek/dual_ccci/ccmni_v2_net.c:21:
+/home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci_common.h:38:0: warning: "pr_fmt" redefined
+ #define pr_fmt(fmt) "["KBUILD_MODNAME"]"fmt
+ ^
+In file included from include/linux/kernel.h:13:0,
+                 from include/linux/interrupt.h:5,
+                 from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci_md.h:19,
+                 from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci_common.h:25,
+                 from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci.h:3,
+                 from drivers/misc/mediatek/dual_ccci/ccmni_v2_net.c:21:
+include/linux/printk.h:208:0: note: this is the location of the previous definition
+ #define pr_fmt(fmt) fmt
+ ^
+In file included from net/netfilter/xt_tcpudp.c:8:0:
+include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
+ static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
+                                    ^
+<command-line>:0:16: warning: missing whitespace after the macro name
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci.h:3:0,
                  from drivers/misc/mediatek/dual_ccci/ccmni.c:20:
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci_common.h:38:0: warning: "pr_fmt" redefined
@@ -3800,8 +3708,6 @@ In file included from include/linux/kernel.h:13:0,
 include/linux/printk.h:208:0: note: this is the location of the previous definition
  #define pr_fmt(fmt) fmt
  ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci.h:3:0,
@@ -3818,6 +3724,7 @@ In file included from include/linux/kernel.h:13:0,
 include/linux/printk.h:208:0: note: this is the location of the previous definition
  #define pr_fmt(fmt) fmt
  ^
+<command-line>:0:16: warning: missing whitespace after the macro name
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci.h:3:0,
                  from drivers/misc/mediatek/dual_ccci/ccci_statistics.c:15:
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dual_ccci/include/ccci_common.h:38:0: warning: "pr_fmt" redefined
@@ -3832,6 +3739,7 @@ In file included from include/linux/kernel.h:13:0,
 include/linux/printk.h:208:0: note: this is the location of the previous definition
  #define pr_fmt(fmt) fmt
  ^
+<command-line>:0:16: warning: missing whitespace after the macro name
 In file included from drivers/misc/mediatek/dum-char/mt6582/dumchar.c:26:0:
 include/linux/mmc/sd_misc.h:148:0: warning: "EXT_CSD_HC_ERASE_GRP_SIZE" redefined
  #define EXT_CSD_HC_ERASE_GRP_SIZE        (224) /* RO */
@@ -3867,38 +3775,12 @@ include/linux/mmc/sd_misc.h:150:0: note: this is the location of the previous de
  #define EXT_CSD_RPMB_SIZE_MULT           (168) /* R */
  ^
 <command-line>:0:16: warning: missing whitespace after the macro name
-In file included from drivers/mmc/card/block.c:60:0:
-include/linux/mmc/sd_misc.h:148:0: warning: "EXT_CSD_HC_ERASE_GRP_SIZE" redefined
- #define EXT_CSD_HC_ERASE_GRP_SIZE        (224) /* RO */
- ^
-In file included from include/trace/events/mmc.h:22:0,
-                 from drivers/mmc/card/block.c:39:
-include/linux/mmc/mmc.h:314:0: note: this is the location of the previous definition
- #define EXT_CSD_HC_ERASE_GRP_SIZE 224 /* RO */
- ^
-In file included from drivers/mmc/card/block.c:60:0:
-include/linux/mmc/sd_misc.h:157:0: warning: "EXT_CSD_CACHE_CTRL" redefined
- #define EXT_CSD_CACHE_CTRL               (33)
- ^
-In file included from include/trace/events/mmc.h:22:0,
-                 from drivers/mmc/card/block.c:39:
-include/linux/mmc/mmc.h:276:0: note: this is the location of the previous definition
- #define EXT_CSD_CACHE_CTRL  33      /* R/W */
- ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-drivers/mtd/mtdcore.c:1177:11: warning: initialization from incompatible pointer type
-  .write = mtd_writeable_proc_write,
-           ^
-drivers/mtd/mtdcore.c:1177:11: warning: (near initialization for ‘mtd_write_proc_fops.write’)
-drivers/mtd/mtdcore.c:1182:11: warning: initialization from incompatible pointer type
-  .write = mtd_change_proc_write,
-           ^
-drivers/mtd/mtdcore.c:1182:11: warning: (near initialization for ‘mtd_change_proc_fops.write’)
 <command-line>:0:16: warning: missing whitespace after the macro name
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/fmradio/Makefile:10: feature_option="MT6627_FM"
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/fmradio/Makefile:75: MT6627_FM
@@ -3910,6 +3792,10 @@ drivers/misc/mediatek/fmradio/core/fm_module.c:1349:12: warning: ‘FM_major’ 
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
+In file included from net/netfilter/xt_qtaguid.c:29:0:
+include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
+ static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
+                                    ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
@@ -3919,24 +3805,86 @@ drivers/misc/mediatek/fmradio/core/fm_module.c:1349:12: warning: ‘FM_major’ 
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
+In file included from net/netfilter/xt_socket.c:18:0:
+include/net/udp.h:122:36: warning: ‘udp_tracing_mark_write_addr’ defined but not used [-Wunused-variable]
+ static unsigned long __read_mostly udp_tracing_mark_write_addr = 0;
+                                    ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+drivers/staging/android/ion/ion_heap.c: In function ‘ion_heap_create’:
+drivers/staging/android/ion/ion_heap.c:330:2: warning: case value ‘10’ not in enumerated type ‘enum ion_heap_type’ [-Wswitch]
+  case ION_HEAP_TYPE_MULTIMEDIA:
+  ^
+drivers/staging/android/ion/ion_heap.c: In function ‘ion_heap_destroy’:
+drivers/staging/android/ion/ion_heap.c:372:2: warning: case value ‘10’ not in enumerated type ‘enum ion_heap_type’ [-Wswitch]
+  case ION_HEAP_TYPE_MULTIMEDIA:
+  ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-drivers/power/mediatek/battery_meter.c: In function ‘battery_meter_suspend’:
-drivers/power/mediatek/battery_meter.c:3511:18: warning: unused variable ‘xts’ [-Wunused-variable]
-  struct timespec xts, tom;
-                  ^
-drivers/power/mediatek/battery_meter.c: In function ‘battery_meter_dts_probe’:
-drivers/power/mediatek/battery_meter.c:3807:25: warning: unused variable ‘battery_dir’ [-Wunused-variable]
-  struct proc_dir_entry *battery_dir = NULL;
+drivers/staging/android/ion/mtk/ion_mm_heap.c: In function ‘ion_mm_heap_debug_show’:
+drivers/staging/android/ion/mtk/ion_mm_heap.c:504:25: warning: unused variable ‘i’ [-Wunused-variable]
+                     int i;
                          ^
-drivers/power/mediatek/battery_meter.c: At top level:
-drivers/power/mediatek/battery_meter.c:3822:31: warning: ‘battery_meter_dts_driver’ defined but not used [-Wunused-variable]
- static struct platform_driver battery_meter_dts_driver = {
-                               ^
+drivers/staging/android/ion/mtk/ion_mm_heap.c: In function ‘ion_mm_ioctl’:
+drivers/staging/android/ion/mtk/ion_mm_heap.c:740:36: warning: comparison between ‘enum ion_heap_type’ and ‘enum mtk_ion_heap_type’ [-Wenum-compare]
+             if (buffer->heap->type == ION_HEAP_TYPE_MULTIMEDIA)
+                                    ^
+drivers/staging/android/ion/mtk/ion_mm_heap.c:796:40: warning: comparison between ‘enum ion_heap_type’ and ‘enum mtk_ion_heap_type’ [-Wenum-compare]
+                 if (buffer->heap->type == ION_HEAP_TYPE_MULTIMEDIA)
+                                        ^
+drivers/staging/android/ion/mtk/ion_mm_heap.c:833:40: warning: comparison between ‘enum ion_heap_type’ and ‘enum mtk_ion_heap_type’ [-Wenum-compare]
+                 if (buffer->heap->type == ION_HEAP_TYPE_MULTIMEDIA)
+                                        ^
+drivers/staging/android/ion/mtk/ion_mm_heap.c:871:40: warning: comparison between ‘enum ion_heap_type’ and ‘enum mtk_ion_heap_type’ [-Wenum-compare]
+                 if (buffer->heap->type == ION_HEAP_TYPE_MULTIMEDIA)
+                                        ^
+drivers/staging/android/ion/mtk/ion_mm_heap.c:908:40: warning: comparison between ‘enum ion_heap_type’ and ‘enum mtk_ion_heap_type’ [-Wenum-compare]
+                 if (buffer->heap->type == ION_HEAP_TYPE_MULTIMEDIA)
+                                        ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from drivers/staging/zram/zram_drv.c:42:0:
+drivers/staging/zram/zram_drv.h:81:5: warning: "CONFIG_ZSM" is not defined [-Wundef]
+ #if CONFIG_ZSM
+     ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from drivers/staging/zram/zram_sysfs.c:20:0:
+drivers/staging/zram/zram_drv.h:81:5: warning: "CONFIG_ZSM" is not defined [-Wundef]
+ #if CONFIG_ZSM
+     ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from drivers/usb/gadget/android.c:37:0:
+include/linux/musb/mtk_musb.h:73:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ extern bool is_saving_mode();
+ ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+drivers/usb/gadget/android.c: In function ‘serial_function_bind_config’:
+drivers/usb/gadget/android.c:950:10: warning: ‘i’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  while (i-- > 0)
+          ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
@@ -3999,25 +3947,13 @@ drivers/misc/mediatek/i2c/mt6582/i2c.c:1343:21: warning: (near initialization fo
 drivers/misc/mediatek/i2c/mt6582/i2c.c:1130:12: warning: ‘standard_i2c_transfer’ defined but not used [-Wunused-function]
  static S32 standard_i2c_transfer(struct i2c_adapter *adap, struct i2c_msg msgs[], S32 num)
             ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
 drivers/misc/mediatek/i2c/mt6582/i2c_common.c: In function ‘mt_i2c_test’:
 drivers/misc/mediatek/i2c/mt6582/i2c_common.c:93:17: warning: unused variable ‘buffer’ [-Wunused-variable]
    unsigned char buffer[]={0x55};
                  ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-drivers/staging/android/ion/ion_heap.c: In function ‘ion_heap_create’:
-drivers/staging/android/ion/ion_heap.c:330:2: warning: case value ‘10’ not in enumerated type ‘enum ion_heap_type’ [-Wswitch]
-  case ION_HEAP_TYPE_MULTIMEDIA:
-  ^
-drivers/staging/android/ion/ion_heap.c: In function ‘ion_heap_destroy’:
-drivers/staging/android/ion/ion_heap.c:372:2: warning: case value ‘10’ not in enumerated type ‘enum ion_heap_type’ [-Wswitch]
-  case ION_HEAP_TYPE_MULTIMEDIA:
-  ^
+<command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
@@ -4050,32 +3986,6 @@ include/linux/irqchip/arm-gic.h:30:0: note: this is the location of the previous
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-drivers/staging/android/ion/mtk/ion_mm_heap.c: In function ‘ion_mm_heap_debug_show’:
-drivers/staging/android/ion/mtk/ion_mm_heap.c:504:25: warning: unused variable ‘i’ [-Wunused-variable]
-                     int i;
-                         ^
-drivers/staging/android/ion/mtk/ion_mm_heap.c: In function ‘ion_mm_ioctl’:
-drivers/staging/android/ion/mtk/ion_mm_heap.c:740:36: warning: comparison between ‘enum ion_heap_type’ and ‘enum mtk_ion_heap_type’ [-Wenum-compare]
-             if (buffer->heap->type == ION_HEAP_TYPE_MULTIMEDIA)
-                                    ^
-drivers/staging/android/ion/mtk/ion_mm_heap.c:796:40: warning: comparison between ‘enum ion_heap_type’ and ‘enum mtk_ion_heap_type’ [-Wenum-compare]
-                 if (buffer->heap->type == ION_HEAP_TYPE_MULTIMEDIA)
-                                        ^
-drivers/staging/android/ion/mtk/ion_mm_heap.c:833:40: warning: comparison between ‘enum ion_heap_type’ and ‘enum mtk_ion_heap_type’ [-Wenum-compare]
-                 if (buffer->heap->type == ION_HEAP_TYPE_MULTIMEDIA)
-                                        ^
-drivers/staging/android/ion/mtk/ion_mm_heap.c:871:40: warning: comparison between ‘enum ion_heap_type’ and ‘enum mtk_ion_heap_type’ [-Wenum-compare]
-                 if (buffer->heap->type == ION_HEAP_TYPE_MULTIMEDIA)
-                                        ^
-drivers/staging/android/ion/mtk/ion_mm_heap.c:908:40: warning: comparison between ‘enum ion_heap_type’ and ‘enum mtk_ion_heap_type’ [-Wenum-compare]
-                 if (buffer->heap->type == ION_HEAP_TYPE_MULTIMEDIA)
-                                        ^
-<command-line>:0:16: warning: missing whitespace after the macro name
 drivers/misc/mediatek/keypad/kpd.c:86:13: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
  static void timer_exit() 
              ^
@@ -4089,6 +3999,7 @@ drivers/misc/mediatek/keypad/kpd.c: In function ‘kpd_pdrv_probe’:
 drivers/misc/mediatek/keypad/kpd.c:809:6: warning: "KPD_USE_EXTEND_TYPE" is not defined [-Wundef]
  #if !KPD_USE_EXTEND_TYPE
       ^
+<command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
@@ -4115,10 +4026,13 @@ drivers/misc/mediatek/keypad/mt6582/hal_kpd.c:260:13: warning: ‘mtk_kpd_get_gp
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-In file included from drivers/staging/zram/zram_drv.c:42:0:
-drivers/staging/zram/zram_drv.h:81:5: warning: "CONFIG_ZSM" is not defined [-Wundef]
- #if CONFIG_ZSM
-     ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/magnetometer/inc/mag.h:17:0,
+                 from drivers/misc/mediatek/magnetometer/mag.c:2:
+/home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/magnetometer/inc/mag_factory.h:37:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ int mag_factory_device_init();
+ ^
+<command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 drivers/misc/mediatek/m4u/mt6582/m4u_priv.c:239:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
  static int m4u_cache_sync_init();
@@ -4140,6 +4054,7 @@ drivers/misc/mediatek/m4u/mt6582/m4u_priv.c: In function ‘m4u_probe’:
 drivers/misc/mediatek/m4u/mt6582/m4u_priv.c:1221:15: warning: unused variable ‘M4U_Event’ [-Wunused-variable]
      MMP_Event M4U_Event;
                ^
+<command-line>:0:16: warning: missing whitespace after the macro name
 drivers/misc/mediatek/m4u/mt6582/m4u_priv.c: In function ‘m4u_hw_init’:
 drivers/misc/mediatek/m4u/mt6582/m4u_priv.c:3844:5: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
      M4U_PORT_STRUCT port; 
@@ -4154,23 +4069,6 @@ drivers/misc/mediatek/m4u/mt6582/m4u_priv.c:207:25: warning: ‘m4u_get_dir_by_m
 drivers/misc/mediatek/m4u/mt6582/m4u_priv.c:1469:12: warning: ‘m4u_dump_main_tlb_tags’ defined but not used [-Wunused-function]
  static int m4u_dump_main_tlb_tags(int m4u_id) 
             ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from drivers/staging/zram/zram_sysfs.c:20:0:
-drivers/staging/zram/zram_drv.h:81:5: warning: "CONFIG_ZSM" is not defined [-Wundef]
- #if CONFIG_ZSM
-     ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/magnetometer/inc/mag.h:17:0,
-                 from drivers/misc/mediatek/magnetometer/mag.c:2:
-/home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/magnetometer/inc/mag_factory.h:37:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- int mag_factory_device_init();
- ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
 In file included from drivers/misc/mediatek/magnetometer/mag_factory.c:1:0:
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/magnetometer/inc/mag_factory.h:37:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
  int mag_factory_device_init();
@@ -4246,101 +4144,8 @@ drivers/misc/mediatek/magnetometer/st480_auto/st480.c:1072:12: warning: ‘st480
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-In file included from drivers/usb/gadget/android.c:37:0:
-include/linux/musb/mtk_musb.h:73:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- extern bool is_saving_mode();
- ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-drivers/usb/gadget/android.c: In function ‘serial_function_bind_config’:
-drivers/usb/gadget/android.c:950:10: warning: ‘i’ may be used uninitialized in this function [-Wmaybe-uninitialized]
-  while (i-- > 0)
-          ^
-In file included from drivers/video/fb_notify.c:13:0:
-include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
- #define CONFIG_DMA_SHARED_BUFFER
- ^
-In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
-                 from <command-line>:0:
-include/generated/autoconf.h:858:0: note: this is the location of the previous definition
- #define CONFIG_DMA_SHARED_BUFFER 1
- ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from drivers/video/fbmem.c:34:0:
-include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
- #define CONFIG_DMA_SHARED_BUFFER
- ^
-In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
-                 from <command-line>:0:
-include/generated/autoconf.h:858:0: note: this is the location of the previous definition
- #define CONFIG_DMA_SHARED_BUFFER 1
- ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from drivers/video/fbmon.c:29:0:
-include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
- #define CONFIG_DMA_SHARED_BUFFER
- ^
-In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
-                 from <command-line>:0:
-include/generated/autoconf.h:858:0: note: this is the location of the previous definition
- #define CONFIG_DMA_SHARED_BUFFER 1
- ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from drivers/video/fbcmap.c:16:0:
-include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
- #define CONFIG_DMA_SHARED_BUFFER
- ^
-In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
-                 from <command-line>:0:
-include/generated/autoconf.h:858:0: note: this is the location of the previous definition
- #define CONFIG_DMA_SHARED_BUFFER 1
- ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from drivers/video/fbsysfs.c:20:0:
-include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
- #define CONFIG_DMA_SHARED_BUFFER
- ^
-In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
-                 from <command-line>:0:
-include/generated/autoconf.h:858:0: note: this is the location of the previous definition
- #define CONFIG_DMA_SHARED_BUFFER 1
- ^
-In file included from drivers/video/modedb.c:16:0:
-include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
- #define CONFIG_DMA_SHARED_BUFFER
- ^
-In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
-                 from <command-line>:0:
-include/generated/autoconf.h:858:0: note: this is the location of the previous definition
- #define CONFIG_DMA_SHARED_BUFFER 1
- ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from drivers/video/fbcvt.c:15:0:
-include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
- #define CONFIG_DMA_SHARED_BUFFER
- ^
-In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
-                 from <command-line>:0:
-include/generated/autoconf.h:858:0: note: this is the location of the previous definition
- #define CONFIG_DMA_SHARED_BUFFER 1
- ^
-In file included from drivers/misc/mediatek/mlog/mlog_logger.c:30:0:
-/home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/staging/zram/zram_drv.h:81:5: warning: "CONFIG_ZSM" is not defined [-Wundef]
- #if CONFIG_ZSM
-     ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 drivers/misc/mediatek/mmc-host/mt6582/dbg.c:2358:13: warning: initialization from incompatible pointer type
      .read = msdc_debug_proc_read_FT,
@@ -4362,34 +4167,56 @@ drivers/misc/mediatek/mmc-host/mt6582/dbg.c:2368:14: warning: initialization fro
      .write = msdc_tune_proc_write,
               ^
 drivers/misc/mediatek/mmc-host/mt6582/dbg.c:2368:14: warning: (near initialization for ‘msdc_tune_fops.write’)
-In file included from drivers/video/cfbfillrect.c:18:0:
+In file included from drivers/misc/mediatek/mlog/mlog_logger.c:30:0:
+/home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/staging/zram/zram_drv.h:81:5: warning: "CONFIG_ZSM" is not defined [-Wundef]
+ #if CONFIG_ZSM
+     ^
+drivers/usb/storage/usual-tables.c:64:20: warning: large integer implicitly truncated to unsigned type [-Woverflow]
+ .bInterfaceClass = (cl), \
+                    ^
+drivers/usb/storage/unusual_devs.h:1922:1: note: in expansion of macro ‘HW_UNUSUAL_DEV’
+ HW_UNUSUAL_DEV(  0x2001, 0xa708, 0x06, 0x50,
+ ^
+In file included from drivers/video/fb_notify.c:13:0:
 include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
  #define CONFIG_DMA_SHARED_BUFFER
  ^
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
                  from <command-line>:0:
-include/generated/autoconf.h:858:0: note: this is the location of the previous definition
- #define CONFIG_DMA_SHARED_BUFFER 1
- ^
-In file included from drivers/video/cfbcopyarea.c:28:0:
-include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
- #define CONFIG_DMA_SHARED_BUFFER
- ^
-In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
-                 from <command-line>:0:
-include/generated/autoconf.h:858:0: note: this is the location of the previous definition
+include/generated/autoconf.h:854:0: note: this is the location of the previous definition
  #define CONFIG_DMA_SHARED_BUFFER 1
  ^
 <command-line>:0:16: warning: missing whitespace after the macro name
-In file included from drivers/video/cfbimgblt.c:34:0:
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from drivers/video/fbmem.c:34:0:
 include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
  #define CONFIG_DMA_SHARED_BUFFER
  ^
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
                  from <command-line>:0:
-include/generated/autoconf.h:858:0: note: this is the location of the previous definition
+include/generated/autoconf.h:854:0: note: this is the location of the previous definition
  #define CONFIG_DMA_SHARED_BUFFER 1
  ^
+In file included from include/linux/mmprofile.h:3:0,
+                 from include/linux/mmprofile_internal.h:4,
+                 from drivers/misc/mediatek/mmp/dummy/mmprofile.c:17:
+include/linux/mmprofile_static_event.h:21:26: warning: ‘MMProfileStaticEvents’ defined but not used [-Wunused-variable]
+ static MMP_StaticEvent_t MMProfileStaticEvents[] = {
+                          ^
+In file included from drivers/misc/mediatek/mmp/dummy/mmprofile.c:17:0:
+include/linux/mmprofile_internal.h:92:13: warning: ‘MMProfileInitBuffer’ declared ‘static’ but never defined [-Wunused-function]
+ static void MMProfileInitBuffer(void);
+             ^
+include/linux/mmprofile_internal.h:93:13: warning: ‘MMProfileResetBuffer’ declared ‘static’ but never defined [-Wunused-function]
+ static void MMProfileResetBuffer(void);
+             ^
+drivers/misc/mediatek/mmp/dummy/mmprofile.c:150:12: warning: ‘mmprofile_probe’ defined but not used [-Wunused-function]
+ static int mmprofile_probe(struct platform_device *pdev)
+            ^
+drivers/misc/mediatek/mmp/dummy/mmprofile.c:168:12: warning: ‘mmprofile_remove’ defined but not used [-Wunused-function]
+ static int mmprofile_remove(struct platform_device *pdev)
+            ^
+<command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 In file included from drivers/misc/mediatek/mmc-host/mt6582/mt_sd_misc.c:28:0:
 include/linux/mmc/sd_misc.h:148:0: warning: "EXT_CSD_HC_ERASE_GRP_SIZE" redefined
@@ -4407,7 +4234,72 @@ In file included from drivers/misc/mediatek/mmc-host/mt6582/mt_sd_misc.c:17:0:
 include/linux/mmc/mmc.h:276:0: note: this is the location of the previous definition
  #define EXT_CSD_CACHE_CTRL  33      /* R/W */
  ^
+In file included from drivers/video/fbmon.c:29:0:
+include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
+ #define CONFIG_DMA_SHARED_BUFFER
+ ^
+In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
+                 from <command-line>:0:
+include/generated/autoconf.h:854:0: note: this is the location of the previous definition
+ #define CONFIG_DMA_SHARED_BUFFER 1
+ ^
 <command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from drivers/video/fbcmap.c:16:0:
+include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
+ #define CONFIG_DMA_SHARED_BUFFER
+ ^
+In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
+                 from <command-line>:0:
+include/generated/autoconf.h:854:0: note: this is the location of the previous definition
+ #define CONFIG_DMA_SHARED_BUFFER 1
+ ^
+In file included from drivers/video/fbsysfs.c:20:0:
+include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
+ #define CONFIG_DMA_SHARED_BUFFER
+ ^
+In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
+                 from <command-line>:0:
+include/generated/autoconf.h:854:0: note: this is the location of the previous definition
+ #define CONFIG_DMA_SHARED_BUFFER 1
+ ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from drivers/video/modedb.c:16:0:
+include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
+ #define CONFIG_DMA_SHARED_BUFFER
+ ^
+In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
+                 from <command-line>:0:
+include/generated/autoconf.h:854:0: note: this is the location of the previous definition
+ #define CONFIG_DMA_SHARED_BUFFER 1
+ ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from drivers/video/fbcvt.c:15:0:
+include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
+ #define CONFIG_DMA_SHARED_BUFFER
+ ^
+In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
+                 from <command-line>:0:
+include/generated/autoconf.h:854:0: note: this is the location of the previous definition
+ #define CONFIG_DMA_SHARED_BUFFER 1
+ ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+drivers/misc/mediatek/mtprof/mt_printk_ctrl.c:38:14: warning: initialization from incompatible pointer type
+     .write = mt_##name##_write,\
+              ^
+drivers/misc/mediatek/mtprof/mt_printk_ctrl.c:77:1: note: in expansion of macro ‘MT_DEBUG_ENTRY’
+ MT_DEBUG_ENTRY(printk_ctrl);
+ ^
+drivers/misc/mediatek/mtprof/mt_printk_ctrl.c:38:14: warning: (near initialization for ‘mt_printk_ctrl_fops.write’)
+     .write = mt_##name##_write,\
+              ^
+drivers/misc/mediatek/mtprof/mt_printk_ctrl.c:77:1: note: in expansion of macro ‘MT_DEBUG_ENTRY’
+ MT_DEBUG_ENTRY(printk_ctrl);
+ ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 In file included from drivers/misc/mediatek/mmc-host/mt6582/mt_dump.c:19:0:
@@ -4475,40 +4367,36 @@ In file included from drivers/misc/mediatek/mmc-host/mt6582/mt_dump.c:19:0:
 include/linux/mmc/sd_misc.h:155:0: note: this is the location of the previous definition
  #define EXT_CSD_PART_CFG                 (179) /* R/W/E & R/W/E_P */
  ^
-drivers/usb/storage/usual-tables.c:64:20: warning: large integer implicitly truncated to unsigned type [-Woverflow]
- .bInterfaceClass = (cl), \
-                    ^
-drivers/usb/storage/unusual_devs.h:1922:1: note: in expansion of macro ‘HW_UNUSUAL_DEV’
- HW_UNUSUAL_DEV(  0x2001, 0xa708, 0x06, 0x50,
+In file included from drivers/video/cfbfillrect.c:18:0:
+include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
+ #define CONFIG_DMA_SHARED_BUFFER
+ ^
+In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
+                 from <command-line>:0:
+include/generated/autoconf.h:854:0: note: this is the location of the previous definition
+ #define CONFIG_DMA_SHARED_BUFFER 1
  ^
 <command-line>:0:16: warning: missing whitespace after the macro name
-In file included from include/linux/mmprofile.h:3:0,
-                 from include/linux/mmprofile_internal.h:4,
-                 from drivers/misc/mediatek/mmp/dummy/mmprofile.c:17:
-include/linux/mmprofile_static_event.h:21:26: warning: ‘MMProfileStaticEvents’ defined but not used [-Wunused-variable]
- static MMP_StaticEvent_t MMProfileStaticEvents[] = {
-                          ^
-In file included from drivers/misc/mediatek/mmp/dummy/mmprofile.c:17:0:
-include/linux/mmprofile_internal.h:92:13: warning: ‘MMProfileInitBuffer’ declared ‘static’ but never defined [-Wunused-function]
- static void MMProfileInitBuffer(void);
-             ^
-include/linux/mmprofile_internal.h:93:13: warning: ‘MMProfileResetBuffer’ declared ‘static’ but never defined [-Wunused-function]
- static void MMProfileResetBuffer(void);
-             ^
-drivers/misc/mediatek/mmp/dummy/mmprofile.c:150:12: warning: ‘mmprofile_probe’ defined but not used [-Wunused-function]
- static int mmprofile_probe(struct platform_device *pdev)
-            ^
-drivers/misc/mediatek/mmp/dummy/mmprofile.c:168:12: warning: ‘mmprofile_remove’ defined but not used [-Wunused-function]
- static int mmprofile_remove(struct platform_device *pdev)
-            ^
+In file included from drivers/video/cfbcopyarea.c:28:0:
+include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
+ #define CONFIG_DMA_SHARED_BUFFER
+ ^
+In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
+                 from <command-line>:0:
+include/generated/autoconf.h:854:0: note: this is the location of the previous definition
+ #define CONFIG_DMA_SHARED_BUFFER 1
+ ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from drivers/video/cfbimgblt.c:34:0:
+include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
+ #define CONFIG_DMA_SHARED_BUFFER
+ ^
+In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
+                 from <command-line>:0:
+include/generated/autoconf.h:854:0: note: this is the location of the previous definition
+ #define CONFIG_DMA_SHARED_BUFFER 1
+ ^
 In file included from drivers/misc/mediatek/pmt/mt6582/pmt.c:15:0:
 include/linux/mmc/sd_misc.h:148:0: warning: "EXT_CSD_HC_ERASE_GRP_SIZE" redefined
  #define EXT_CSD_HC_ERASE_GRP_SIZE        (224) /* RO */
@@ -4527,23 +4415,6 @@ In file included from include/linux/mmc/sd_misc.h:9:0,
 include/linux/mmc/mmc.h:276:0: note: this is the location of the previous definition
  #define EXT_CSD_CACHE_CTRL  33      /* R/W */
  ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-drivers/misc/mediatek/mtprof/mt_printk_ctrl.c:38:14: warning: initialization from incompatible pointer type
-     .write = mt_##name##_write,\
-              ^
-drivers/misc/mediatek/mtprof/mt_printk_ctrl.c:77:1: note: in expansion of macro ‘MT_DEBUG_ENTRY’
- MT_DEBUG_ENTRY(printk_ctrl);
- ^
-drivers/misc/mediatek/mtprof/mt_printk_ctrl.c:38:14: warning: (near initialization for ‘mt_printk_ctrl_fops.write’)
-     .write = mt_##name##_write,\
-              ^
-drivers/misc/mediatek/mtprof/mt_printk_ctrl.c:77:1: note: in expansion of macro ‘MT_DEBUG_ENTRY’
- MT_DEBUG_ENTRY(printk_ctrl);
- ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
@@ -4564,7 +4435,17 @@ drivers/misc/mediatek/power_gs/mt6582/mt_power_gs_idle.c:89:28: warning: unused 
      struct proc_dir_entry *mt_entry = NULL;
                             ^
 <command-line>:0:16: warning: missing whitespace after the macro name
+drivers/misc/mediatek/power_gs/mt6582/mt_power_gs_audio_playback.c: In function ‘mt_power_gs_audio_playback_init’:
+drivers/misc/mediatek/power_gs/mt6582/mt_power_gs_audio_playback.c:83:28: warning: unused variable ‘mt_entry’ [-Wunused-variable]
+     struct proc_dir_entry *mt_entry = NULL;
+                            ^
 <command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+drivers/misc/mediatek/power_gs/mt6582/mt_power_gs_video_record.c: In function ‘mt_power_gs_video_record_init’:
+drivers/misc/mediatek/power_gs/mt6582/mt_power_gs_video_record.c:84:28: warning: unused variable ‘mt_entry’ [-Wunused-variable]
+     struct proc_dir_entry *mt_entry = NULL;
+                            ^
 In file included from drivers/misc/mediatek/ram_console/mtk_ram_console.c:28:0:
 include/linux/mmc/sd_misc.h:148:0: warning: "EXT_CSD_HC_ERASE_GRP_SIZE" redefined
  #define EXT_CSD_HC_ERASE_GRP_SIZE        (224) /* RO */
@@ -4583,17 +4464,8 @@ In file included from include/linux/mmc/sd_misc.h:9:0,
 include/linux/mmc/mmc.h:276:0: note: this is the location of the previous definition
  #define EXT_CSD_CACHE_CTRL  33      /* R/W */
  ^
-drivers/misc/mediatek/power_gs/mt6582/mt_power_gs_audio_playback.c: In function ‘mt_power_gs_audio_playback_init’:
-drivers/misc/mediatek/power_gs/mt6582/mt_power_gs_audio_playback.c:83:28: warning: unused variable ‘mt_entry’ [-Wunused-variable]
-     struct proc_dir_entry *mt_entry = NULL;
-                            ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-drivers/misc/mediatek/power_gs/mt6582/mt_power_gs_video_record.c: In function ‘mt_power_gs_video_record_init’:
-drivers/misc/mediatek/power_gs/mt6582/mt_power_gs_video_record.c:84:28: warning: unused variable ‘mt_entry’ [-Wunused-variable]
-     struct proc_dir_entry *mt_entry = NULL;
-                            ^
 In file included from include/linux/spinlock.h:81:0,
                  from include/linux/seqlock.h:29,
                  from include/linux/time.h:5,
@@ -4621,21 +4493,18 @@ drivers/misc/mediatek/power/mt6582/charging_hw_pmic.c:1112:20: warning: ‘charg
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
 In file included from drivers/misc/mediatek/smi/mt6582/smi_debug.c:27:0:
 include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
  #define CONFIG_DMA_SHARED_BUFFER
  ^
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
                  from <command-line>:0:
-include/generated/autoconf.h:858:0: note: this is the location of the previous definition
+include/generated/autoconf.h:854:0: note: this is the location of the previous definition
  #define CONFIG_DMA_SHARED_BUFFER 1
  ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/ssw/Makefile:5: "SSW_DIR=/home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/ssw/ssw_singlessw_exist=y"
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 drivers/misc/mediatek/sound/mt6582/AudDrv_Kernel.c: In function ‘audio_read_proc’:
 drivers/misc/mediatek/sound/mt6582/AudDrv_Kernel.c:4243:5: warning: ignoring return value of ‘copy_to_user’, declared with attribute warn_unused_result [-Wunused-result]
@@ -4643,13 +4512,12 @@ drivers/misc/mediatek/sound/mt6582/AudDrv_Kernel.c:4243:5: warning: ignoring ret
      ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
 drivers/misc/mediatek/sysenv/mt6582/sysenv.c: In function ‘write_env_area’:
 drivers/misc/mediatek/sysenv/mt6582/sysenv.c:508:31: warning: passing argument 2 of ‘kernel_write’ from incompatible pointer type
   ret = kernel_write(write_fp, (u32*)env_buf, CFG_ENV_SIZE, pos);
                                ^
 In file included from drivers/misc/mediatek/sysenv/mt6582/sysenv.c:5:0:
-include/linux/fs.h:2311:16: note: expected ‘const char *’ but argument is of type ‘u32 *’
+include/linux/fs.h:2317:16: note: expected ‘const char *’ but argument is of type ‘u32 *’
  extern ssize_t kernel_write(struct file *, const char *, size_t, loff_t);
                 ^
 drivers/misc/mediatek/sysenv/mt6582/sysenv.c: In function ‘read_env_area’:
@@ -4657,9 +4525,17 @@ drivers/misc/mediatek/sysenv/mt6582/sysenv.c:543:34: warning: passing argument 3
   ret = kernel_read(read_fp, pos, (u32*)env_buf, CFG_ENV_SIZE);
                                   ^
 In file included from drivers/misc/mediatek/sysenv/mt6582/sysenv.c:5:0:
-include/linux/fs.h:2310:12: note: expected ‘char *’ but argument is of type ‘u32 *’
+include/linux/fs.h:2316:12: note: expected ‘char *’ but argument is of type ‘u32 *’
  extern int kernel_read(struct file *, loff_t, char *, unsigned long);
             ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
@@ -4670,7 +4546,6 @@ In file included from include/linux/musb/musb_core.h:71:0,
 include/linux/musb/mtk_musb.h:73:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
  extern bool is_saving_mode();
  ^
-<command-line>:0:16: warning: missing whitespace after the macro name
 drivers/misc/mediatek/usb20/mt6582/usb20.c:535:6: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
  bool is_saving_mode()
       ^
@@ -4682,38 +4557,13 @@ drivers/misc/mediatek/usb20/mt6582/usb20.c:533:1: warning: control reaches end o
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from drivers/misc/mediatek/usb20/mt6582/usb20_phy.c:6:0:
-include/linux/musb/mtk_musb.h:73:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- extern bool is_saving_mode();
- ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from include/linux/musb/musb_core.h:71:0,
-                 from drivers/misc/mediatek/usb20/mt6582/usb20_host.c:22:
-include/linux/musb/mtk_musb.h:73:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- extern bool is_saving_mode();
- ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from include/linux/musb/musb_core.h:71:0,
-                 from drivers/misc/mediatek/usb20/musb_core.c:105:
-include/linux/musb/mtk_musb.h:73:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- extern bool is_saving_mode();
- ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
 In file included from drivers/misc/mediatek/video/disp_drv.c:16:0:
 include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
  #define CONFIG_DMA_SHARED_BUFFER
  ^
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
                  from <command-line>:0:
-include/generated/autoconf.h:858:0: note: this is the location of the previous definition
+include/generated/autoconf.h:854:0: note: this is the location of the previous definition
  #define CONFIG_DMA_SHARED_BUFFER 1
  ^
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_path.h:4:0,
@@ -4725,7 +4575,7 @@ In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/dr
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/arch/arm/mach-mt6582/alps/core/board-custom.h:4:0,
                  from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/video/mt6582/disp_drv_platform.h:65,
                  from drivers/misc/mediatek/video/disp_drv.c:22:
-include/generated/autoconf.h:858:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
+include/generated/autoconf.h:854:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
  #define CONFIG_DMA_SHARED_BUFFER 1
  ^
 In file included from drivers/misc/mediatek/video/disp_drv.c:16:0:
@@ -4735,57 +4585,11 @@ include/linux/fb.h:26:0: note: this is the location of the previous definition
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
 In file included from include/linux/musb/musb_core.h:71:0,
-                 from drivers/misc/mediatek/usb20/musb_gadget_ep0.c:43:
+                 from drivers/misc/mediatek/usb20/mt6582/usb20_host.c:22:
 include/linux/musb/mtk_musb.h:73:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
  extern bool is_saving_mode();
  ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_path.h:4:0,
-                 from drivers/misc/mediatek/video/disp_drv.h:21,
-                 from drivers/misc/mediatek/video/disp_assert_layer.c:17:
-/home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_ovl.h:51:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- unsigned int OVLGetLayer0Addr();
- ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from drivers/misc/mediatek/video/mtkfb.c:19:0:
-include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
- #define CONFIG_DMA_SHARED_BUFFER
- ^
-In file included from drivers/misc/mediatek/video/mtkfb.c:15:0:
-include/generated/autoconf.h:858:0: note: this is the location of the previous definition
- #define CONFIG_DMA_SHARED_BUFFER 1
- ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_path.h:4:0,
-                 from drivers/misc/mediatek/video/disp_drv.h:21,
-                 from drivers/misc/mediatek/video/mtkfb.c:48:
-/home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_ovl.h:51:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- unsigned int OVLGetLayer0Addr();
- ^
-In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/arch/arm/mach-mt6582/alps/core/board-custom.h:4:0,
-                 from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/video/mt6582/disp_drv_platform.h:65,
-                 from drivers/misc/mediatek/video/mtkfb.c:57:
-include/generated/autoconf.h:858:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
- #define CONFIG_DMA_SHARED_BUFFER 1
- ^
-In file included from drivers/misc/mediatek/video/mtkfb.c:19:0:
-include/linux/fb.h:26:0: note: this is the location of the previous definition
- #define CONFIG_DMA_SHARED_BUFFER
- ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from include/linux/musb/musb_core.h:71:0,
-                 from drivers/misc/mediatek/usb20/musb_gadget.c:51:
-include/linux/musb/mtk_musb.h:73:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- extern bool is_saving_mode();
- ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
 In file included from include/linux/irqflags.h:14:0,
                  from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/arch/arm/include/asm/bitops.h:27,
                  from include/linux/bitops.h:22,
@@ -4844,13 +4648,88 @@ include/linux/spinlock.h:323:2: note: in expansion of macro ‘raw_spin_lock_irq
 drivers/misc/mediatek/videocodec/mt6582/videocodec_kernel_driver.c:1027:17: note: in expansion of macro ‘spin_lock_irqsave’
                  spin_lock_irqsave(&EncIsrLock, ulFlags);
                  ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from include/linux/musb/musb_core.h:71:0,
+                 from drivers/misc/mediatek/usb20/musb_core.c:105:
+include/linux/musb/mtk_musb.h:73:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ extern bool is_saving_mode();
+ ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_path.h:4:0,
+                 from drivers/misc/mediatek/video/disp_drv.h:21,
+                 from drivers/misc/mediatek/video/disp_assert_layer.c:17:
+/home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_ovl.h:51:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ unsigned int OVLGetLayer0Addr();
+ ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from drivers/misc/mediatek/video/mtkfb.c:19:0:
+include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
+ #define CONFIG_DMA_SHARED_BUFFER
+ ^
+In file included from drivers/misc/mediatek/video/mtkfb.c:15:0:
+include/generated/autoconf.h:854:0: note: this is the location of the previous definition
+ #define CONFIG_DMA_SHARED_BUFFER 1
+ ^
+In file included from include/linux/musb/musb_core.h:71:0,
+                 from drivers/misc/mediatek/usb20/musb_gadget_ep0.c:43:
+include/linux/musb/mtk_musb.h:73:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ extern bool is_saving_mode();
+ ^
+In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_path.h:4:0,
+                 from drivers/misc/mediatek/video/disp_drv.h:21,
+                 from drivers/misc/mediatek/video/mtkfb.c:48:
+/home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_ovl.h:51:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ unsigned int OVLGetLayer0Addr();
+ ^
+In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/arch/arm/mach-mt6582/alps/core/board-custom.h:4:0,
+                 from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/video/mt6582/disp_drv_platform.h:65,
+                 from drivers/misc/mediatek/video/mtkfb.c:57:
+include/generated/autoconf.h:854:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
+ #define CONFIG_DMA_SHARED_BUFFER 1
+ ^
+In file included from drivers/misc/mediatek/video/mtkfb.c:19:0:
+include/linux/fb.h:26:0: note: this is the location of the previous definition
+ #define CONFIG_DMA_SHARED_BUFFER
+ ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from include/linux/musb/musb_core.h:71:0,
+                 from drivers/misc/mediatek/usb20/musb_gadget.c:51:
+include/linux/musb/mtk_musb.h:73:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ extern bool is_saving_mode();
+ ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from include/linux/musb/musb_core.h:71:0,
+                 from drivers/misc/mediatek/usb20/musb_virthub.c:45:
+include/linux/musb/mtk_musb.h:73:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ extern bool is_saving_mode();
+ ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from include/linux/musb/musb_core.h:71:0,
+                 from drivers/misc/mediatek/usb20/musb_host.c:48:
+include/linux/musb/mtk_musb.h:73:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ extern bool is_saving_mode();
+ ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
 In file included from drivers/misc/mediatek/video/debug.c:18:0:
 include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
  #define CONFIG_DMA_SHARED_BUFFER
  ^
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
                  from <command-line>:0:
-include/generated/autoconf.h:858:0: note: this is the location of the previous definition
+include/generated/autoconf.h:854:0: note: this is the location of the previous definition
  #define CONFIG_DMA_SHARED_BUFFER 1
  ^
 In file included from drivers/misc/mediatek/video/debug.c:29:0:
@@ -4877,6 +4756,22 @@ In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/dr
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_ovl.h:51:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
  unsigned int OVLGetLayer0Addr();
  ^
+In file included from include/linux/musb/musb_core.h:71:0,
+                 from drivers/misc/mediatek/usb20/musbhsdma.c:39:
+include/linux/musb/mtk_musb.h:73:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ extern bool is_saving_mode();
+ ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from include/linux/musb/mtk_musb.h:27:0,
+                 from include/linux/musb/musb_core.h:71,
+                 from drivers/misc/mediatek/usb20/musbhsdma.c:39:
+drivers/misc/mediatek/usb20/musbhsdma.c: In function ‘USB_DMA_status’:
+arch/arm/mach-mt6582/include/mach/mt_reg_base.h:188:18: warning: initialization makes pointer from integer without a cast
+ #define USB_BASE (0xF1200000)
+                  ^
+drivers/misc/mediatek/usb20/musbhsdma.c:546:26: note: in expansion of macro ‘USB_BASE’
+     void __iomem *base = USB_BASE;
+                          ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 In file included from drivers/misc/mediatek/video/fbconfig_kdebug.c:18:0:
 include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
@@ -4884,7 +4779,7 @@ include/linux/fb.h:26:0: warning: "CONFIG_DMA_SHARED_BUFFER" redefined
  ^
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/include/linux/kconfig.h:4:0,
                  from <command-line>:0:
-include/generated/autoconf.h:858:0: note: this is the location of the previous definition
+include/generated/autoconf.h:854:0: note: this is the location of the previous definition
  #define CONFIG_DMA_SHARED_BUFFER 1
  ^
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_path.h:4:0,
@@ -4892,6 +4787,9 @@ In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/dr
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_ovl.h:51:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
  unsigned int OVLGetLayer0Addr();
  ^
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_path.h:4:0,
                  from drivers/misc/mediatek/video/mt6582/disp_drv_platform.h:69,
@@ -4901,41 +4799,16 @@ In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/dr
  ^
 <command-line>:0:16: warning: missing whitespace after the macro name
 <command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from include/linux/musb/musb_core.h:71:0,
-                 from drivers/misc/mediatek/usb20/musb_virthub.c:45:
-include/linux/musb/mtk_musb.h:73:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- extern bool is_saving_mode();
- ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from include/linux/musb/musb_core.h:71:0,
-                 from drivers/misc/mediatek/usb20/musb_host.c:48:
-include/linux/musb/mtk_musb.h:73:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- extern bool is_saving_mode();
- ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_path.h:4:0,
-                 from drivers/misc/mediatek/video/mt6582/disp_drv_platform.h:69,
-                 from drivers/misc/mediatek/video/mt6582/dpi_drv.c:42:
-/home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_ovl.h:51:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- unsigned int OVLGetLayer0Addr();
- ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_path.h:4:0,
-                 from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/video/disp_drv.h:21,
-                 from drivers/misc/mediatek/video/mt6582/disp_drv_dbi.c:23:
-/home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_ovl.h:51:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- unsigned int OVLGetLayer0Addr();
- ^
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_path.h:4:0,
                  from drivers/misc/mediatek/video/mt6582/disp_drv_platform.h:69,
                  from drivers/misc/mediatek/video/mt6582/lcd_reg.h:18,
                  from drivers/misc/mediatek/video/mt6582/lcd_drv.c:27:
+/home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_ovl.h:51:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ unsigned int OVLGetLayer0Addr();
+ ^
+In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_path.h:4:0,
+                 from drivers/misc/mediatek/video/mt6582/disp_drv_platform.h:69,
+                 from drivers/misc/mediatek/video/mt6582/dpi_drv.c:42:
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_ovl.h:51:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
  unsigned int OVLGetLayer0Addr();
  ^
@@ -4960,41 +4833,32 @@ drivers/misc/mediatek/video/mt6582/lcd_drv.c:1555:22: warning: ‘v2p’ defined
 <command-line>:0:16: warning: missing whitespace after the macro name
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_path.h:4:0,
                  from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/video/disp_drv.h:21,
-                 from drivers/misc/mediatek/video/mt6582/disp_drv_dpi.c:23:
+                 from drivers/misc/mediatek/video/mt6582/disp_drv_dbi.c:23:
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_ovl.h:51:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
  unsigned int OVLGetLayer0Addr();
  ^
 <command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+<command-line>:0:16: warning: missing whitespace after the macro name
+In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_path.h:4:0,
+                 from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/video/disp_drv.h:21,
+                 from drivers/misc/mediatek/video/mt6582/disp_drv_dpi.c:23:
+/home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_ovl.h:51:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+ unsigned int OVLGetLayer0Addr();
+ ^
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_path.h:4:0,
                  from drivers/misc/mediatek/video/mt6582/disp_drv_platform.h:69,
                  from drivers/misc/mediatek/video/mt6582/disp_drv_dsi.c:21:
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_ovl.h:51:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
  unsigned int OVLGetLayer0Addr();
  ^
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
-<command-line>:0:16: warning: missing whitespace after the macro name
 In file included from /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_path.h:4:0,
                  from drivers/misc/mediatek/video/mt6582/disp_drv_platform.h:69,
                  from drivers/misc/mediatek/video/mt6582/disp_hal.c:5:
 /home/assusdan/aosp/kernels/cyanogenmod_kernel_hs_puref/drivers/misc/mediatek/dispsys/mt6582/ddp_ovl.h:51:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
  unsigned int OVLGetLayer0Addr();
  ^
-In file included from include/linux/musb/musb_core.h:71:0,
-                 from drivers/misc/mediatek/usb20/musbhsdma.c:39:
-include/linux/musb/mtk_musb.h:73:1: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
- extern bool is_saving_mode();
- ^
-In file included from include/linux/musb/mtk_musb.h:27:0,
-                 from include/linux/musb/musb_core.h:71,
-                 from drivers/misc/mediatek/usb20/musbhsdma.c:39:
-drivers/misc/mediatek/usb20/musbhsdma.c: In function ‘USB_DMA_status’:
-arch/arm/mach-mt6582/include/mach/mt_reg_base.h:188:18: warning: initialization makes pointer from integer without a cast
- #define USB_BASE (0xF1200000)
-                  ^
-drivers/misc/mediatek/usb20/musbhsdma.c:546:26: note: in expansion of macro ‘USB_BASE’
-     void __iomem *base = USB_BASE;
-                          ^
+<command-line>:0:16: warning: missing whitespace after the macro name
 WARNING: modpost: Found 18 section mismatch(es).
 To see full details build your kernel with:
 'make CONFIG_DEBUG_SECTION_MISMATCH=y'

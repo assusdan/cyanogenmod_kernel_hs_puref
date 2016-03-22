@@ -186,7 +186,7 @@ int kdSetFlashlightDrv(unsigned int *pSensorId)
 
 #else
 		//@@if(partId==1)
-			constantFlashlightInit(&g_pFlashlightFunc);
+		//	constantFlashlightInit(&g_pFlashlightFunc);
 		//@@else //if(partId==2)
 			//@@strobeInit_main_sid1_part2(&g_pFlashlightFunc);
 #endif
