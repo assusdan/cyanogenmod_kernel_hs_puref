@@ -11,7 +11,6 @@
 * You should have received a copy of the GNU General Public License along with this program.
 * If not, see <http://www.gnu.org/licenses/>.
 */
-
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/sched.h>
@@ -46,15 +45,9 @@
 /**************************************************
 * enable for DVFS random test
 ***************************************************/
-//#define MT_DVFS_RANDOM_TEST
 
-/**************************************************
-* If MT6333 supported, VPROC could support lower than 1.15V
-* CONFIG_MTK_DVFS_DISABLE_LOW_VOLTAGE_SUPPORT only for phone_v1
-***************************************************/
-//#if defined(CONFIG_IS_VCORE_USE_6333VCORE) && !defined(CONFIG_MTK_DVFS_DISABLE_LOW_VOLTAGE_SUPPORT)
 #define MT_DVFS_LOW_VOLTAGE_SUPPORT
-//#endif
+
 
 /**************************************************
 * enable this option to adjust buck voltage
@@ -174,10 +167,20 @@ static unsigned int g_limited_max_ncpu;
 static unsigned int g_limited_max_freq;
 static unsigned int g_limited_min_freq;
 static unsigned int g_cpufreq_get_ptp_level = 0;
-static unsigned int g_max_freq_by_ptp = DVFS_F0; /* default 1.3GHz */
+static unsigned int g_max_freq_by_ptp = DVFS_F1; /* default 1.3GHz */
 #if defined(CONFIG_THERMAL_LIMIT_TEST)
 static unsigned int g_limited_load_for_thermal_test = 0;
 static unsigned int g_limited_max_thermal_power;
+#endif
+#ifdef LENOVO_CPUFREQ_LIMIT
+static unsigned int g_max_freq_on_suspend = DVFS_F3; /* default 1.2GHz */
+
+#define STRINGIFY(s) XSTRINGIFY(s)
+#define XSTRINGIFY(s) #s
+#pragma message ("LENOVO_CPUFREQ_LIMIT=" STRINGIFY(LENOVO_CPUFREQ_LIMIT))
+
+#else
+static unsigned int g_max_freq_on_suspend = DVFS_F3; /* default 1.2MHz */
 #endif
 static unsigned int g_thermal_protect_limited_power = 0;
 static unsigned int g_cpu_power_table_num = 0;
@@ -426,9 +429,25 @@ static unsigned int mt_cpufreq_limit_max_freq_by_early_suspend(void)
     if (!policy)
         goto no_policy;
 
+#ifdef LENOVO_CPUFREQ_LIMIT
+    xlog_printk(ANDROID_LOG_INFO, "Power/DVFS", "[1] mt_cpufreq_limit_max_freq_early_suspend policy->max=%d\n", policy->max);
+    if (policy->max < DVFS_F1)
+    {
+        cpufreq_driver_target(policy, policy->max, CPUFREQ_RELATION_L);
+        xlog_printk(ANDROID_LOG_INFO, "Power/DVFS", "[2] mt_cpufreq limited max freq by early suspend %d\n", policy->max);
+    }
+    else
+    {
+        cpufreq_driver_target(policy, g_max_freq_on_suspend, CPUFREQ_RELATION_L);
+        xlog_printk(ANDROID_LOG_INFO, "Power/DVFS", "[3] mt_cpufreq limited max freq by early suspend %d\n", g_max_freq_on_suspend);
+    }
+#else
     cpufreq_driver_target(policy, DVFS_F2, CPUFREQ_RELATION_L);
 
-    xlog_printk(ANDROID_LOG_INFO, "Power/DVFS", "mt_cpufreq limited max freq by early suspend %d\n", DVFS_F2);
+    xlog_printk(ANDROID_LOG_INFO, "Power/DVFS", "mt_cpufreq limited max freq by early suspend %d\n", DVFS_F1);
+#endif
+
+
 
     cpufreq_cpu_put(policy);
 
@@ -1397,7 +1416,16 @@ static int mt_cpufreq_target(struct cpufreq_policy *policy, unsigned int target_
     *************************************************/
     if(mt_cpufreq_limit_max_freq_early_suspend == true)
     {
-        freqs.new = DVFS_F2;
+	freqs.new = g_max_freq_on_suspend;
+        /* lenovo.sw begin chenyb1 add for cpufreq limit in earlysuspend */
+        #ifdef LENOVO_CPUFREQ_LIMIT
+        if (policy->max < DVFS_F1)
+        {
+            freqs.new = policy->max;
+            xlog_printk(ANDROID_LOG_INFO, "Power/DVFS", "[4] mt_cpufreq_limit_max_freq_early_suspend freqs.new=%d,policy->max=%d\n", freqs.new,  policy->max);
+        }
+        
+        #endif
         dprintk("mt_cpufreq_limit_max_freq_early_suspend, freqs.new = %d\n", freqs.new);
     }
 	
@@ -2215,7 +2243,7 @@ static int mt_cpufreq_limited_power_read(char *buf, char **start, off_t off, int
     int len = 0;
     char *p = buf;
 
-    p += sprintf(p, "g_limited_max_freq = %d, g_limited_max_ncpu = %d\n", g_limited_max_freq, g_limited_max_ncpu);
+    p += sprintf(p, "%d\n", g_max_freq_on_suspend);
 
     len = p - buf;
     return len;
@@ -2728,7 +2756,14 @@ static int mt_cpufreq_pdrv_probe(struct platform_device *pdev)
     g_cur_cpufreq_volt = DVFS_V2; /* Default 1.15V */
     g_limited_max_freq = g_max_freq_by_ptp;
     g_limited_min_freq = DVFS_F4;
-
+#ifndef LENOVO_CPUFREQ_LIMIT
+    if(g_max_freq_by_ptp > DVFS_F1)
+    {
+        mt_cpufreq_max_freq_overdrive = true;
+    }
+#else
+        mt_cpufreq_max_freq_overdrive = true;
+#endif
     xlog_printk(ANDROID_LOG_INFO, "Power/DVFS", "mediatek cpufreq initialized\n");
 
     mt_cpufreq_reg_write(0x0220, PMIC_WRAP_DVFS_ADR0);
@@ -3270,7 +3305,16 @@ static int __init mt_cpufreq_pdrv_init(void)
             mt_entry->read_proc = mt_cpufreq_state_read;
             mt_entry->write_proc = mt_cpufreq_state_write;
         }
-
+#ifdef LENOVO_CPUFREQ_LIMIT
+        g_max_freq_on_suspend = simple_strtoul(LENOVO_CPUFREQ_LIMIT, NULL, 0);
+        
+        mt_entry = create_proc_entry("cpufreq_limit_on_suspend", S_IRUGO | S_IWUSR | S_IWGRP, mt_cpufreq_dir);
+        if (mt_entry)
+        {
+            mt_entry->read_proc = mt_cpufreq_limit_on_suspend_read;
+            mt_entry->write_proc = mt_cpufreq_limit_on_suspend_write;
+        }
+#endif
         mt_entry = create_proc_entry("cpufreq_power_dump", S_IRUGO | S_IWUSR | S_IWGRP, mt_cpufreq_dir);
         if (mt_entry)
         {
