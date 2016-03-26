@@ -11,6 +11,7 @@
 * You should have received a copy of the GNU General Public License along with this program.
 * If not, see <http://www.gnu.org/licenses/>.
 */
+#define LENOVO_CPUFREQ_LIMIT 1040000
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/sched.h>
