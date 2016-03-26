@@ -2760,10 +2760,8 @@ static int mt_cpufreq_pdrv_probe(struct platform_device *pdev)
 #ifndef LENOVO_CPUFREQ_LIMIT
     if(g_max_freq_by_ptp > DVFS_F1)
     {
-        mt_cpufreq_max_freq_overdrive = true;
-    }
+ss    }
 #else
-        mt_cpufreq_max_freq_overdrive = true;
 #endif
     xlog_printk(ANDROID_LOG_INFO, "Power/DVFS", "mediatek cpufreq initialized\n");
 
